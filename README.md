@@ -1,7 +1,8 @@
-# Projedct - *QUẢN LÍ BÁN HÀNG*
+# Project - *QUẢN LÍ BÁN HÀNG*
 
 **Name of your app** Đây là trang web bán hàng
-Danh sách sinh viên: **1312474 Triệu Xuân Quý  **
+Danh sách sinh viên: 
+					 **1312474 Triệu Xuân Quý  **
 					 **1312485 Nguyễn Ngọc Sáng  **
 					 **1312498 Trần Thị Sương  **
 					 **1312508 Nguyễn Đăng Thiện Tâm **
@@ -21,6 +22,7 @@ Danh sách chức năng **bắt buộc**:
 * [ ] Thống kê số lượng bán hàng
 * [ ] Cập nhật, chỉnh sửa tài khoản người dùng.
 * [ ] Phân quyền sử dụng giữa người quản trị và người dùng
+* [ ] Upload, xóa sửa các file
 
 Danh sách chức năng **phụ**:
 
