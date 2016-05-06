@@ -2,10 +2,13 @@ doctype html
 html
   head
     title= title
+    meta(name='viewport' content='idth=device-width, initial-scale=1')
     link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='stylesheets/bootstrap.min.js')
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet')
+    link(rel='stylesheet', href='stylesheets/font-awesome.min.css')
     script(src='/javascripts/jquery.min.js')
     script(src='/javascripts/javascript.js')
     script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js")
@@ -64,4 +67,37 @@ html
 
               li
                 a(href="#") Trang chủ
+      div#message
+        div.container
+          div.col-md-5.col-lg-4
+            div.panel
+              div.panel-heading
+                div.panel-control
+                  div.btn-group
+                    button(type="button" data-toggle="collapse" data-target="#demo-chat-body").btn.btn-default.collapsed
+                      i.fa.fa-chevron-down
+                h3.panel-title Hỗ trợ trực tuyến
+              div#demo-chat-body.collapse.in
+                div(style="height:380px").nano.has-scrollbar
+                  div(tabindex="0" style="right: -17px;").nano-content.pad-all
+                    ul.list-unstyled.media-block
+                      li.mar-btm
+                        div.media-left
+                          img(src="http://bootdey.com/img/Content/avatar/avatar1.png" class="img-circle img-sm" alt="Profile Picture")
+                        div.media-body.pad-hor
+                          div.speech
+                            a(href="#").media-heading
+                            p Hello Lucy, how can I help you today
+                            p.speech-time
+                              ifa.fa-clock-o.fa-fw 09:23AM
+                  div.nano-pane
+                    div(style="height: 141px; transform: translate(0px, 0px);").nano-slider
+                div.panel-footer
+                  div.row
+                    div.col-xs-9
+                      input(type="text" placeholder="Enter your text").form-control.chat-input
+                    div.col-xs-3
+                      button(type="submit").btn.btn-primary.btn-block Send
+
+
     block content
