@@ -1,0 +1,39 @@
+extends ../layouts/default.jade
+block content
+  link(rel='stylesheet', href='css/contact.css')
+  .main_bg
+    .wrap
+      .main
+        .contact
+          .contact_info
+            h2 Get in touch
+            #map
+          .contact-form
+            h2 Contact Us
+            form(method='post', action='contact-post.html')
+              div
+                span
+                  label Name
+                span
+                  input.textbox.form-control(name='userName', type='text')
+              div
+                span
+                  label E-mail
+                span
+                  input.textbox.form-control(name='userEmail', type='text')
+              div
+                span
+                  label Mobile
+                span
+                  input.textbox.form-control(name='userPhone', type='text')
+              div
+                span
+                  label Subject
+                span
+                  textarea.form-control(name='userMsg')
+              div
+                span
+                  input(type='submit', value='Submit us')
+          .clear
+  script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?callback=initMap', async='', defer='')
+  script(type='text/javascript', src='js/contact.js')

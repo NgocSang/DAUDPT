@@ -1,0 +1,18 @@
+extends ../layouts/default.jade
+
+
+
+block content
+	div.login-page
+		div.form
+			form.login-form(action='/login', method='post')
+				p.email
+					input(name="username" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="User name" id="username")
+				p.password
+					input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Password" id="password")
+				button Login
+
+				p.message Not registered? <a href="/signup"> Create an account </a>
+				</br>
+				div.social-login
+					a(href="/auth/facebook" class="btn btn-primary") Log in with facebook
