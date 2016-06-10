@@ -15,34 +15,14 @@ var db = mongoose.connection;
 var User = mongoose.model('User');
 var product = mongoose.model('products');
 
-db.once('open', function callback () {
-  console.log("h");
-});
-
-/*thu*
-/**
- * Expose
- */
-
 module.exports = function (app, passport) {
 
-  app.get('/insertData', function(req, res) {
-  var producted = new product({name: "CVB", productID: 256});
-  producted.save(function (err, data) {
-    if (err) {
-      res.send("Error" + err);
-    }
-    else {
-        res.json(data);
-        console.log("Success");
-    }
-});
-});
+
   app.get('/signup', signup.index);
 
   app.get('/home',function(req, res, next){
     var listproduct = db.model('products');
-    listproduct.find().exec(function(err, data){
+    listproduct.find({'featured':'true'}).exec(function(err, data){
       if(err){
   		    res.send("Errors");
     	}
@@ -61,8 +41,23 @@ module.exports = function (app, passport) {
   app.get('/contact',function(req, res, next){
     res.render('contact');
   });
-  app.get('/details',function(req, res, next){
-    res.render('details');
+  app.get('/:id',function(req, res, next){
+    var productID = req.params.id;
+    var detailsproduct = db.model('products');
+    detailsproduct.find({'productID':productID}).exec(function(err, data){
+      if(err){
+  		    res.send("Errors");
+    	}
+      else
+    	{
+    		//res.json(data);
+        console.log("vo ham detail");
+        console.log(data);
+
+    		res.render('details', {data: data});
+    	}
+
+    });
   });
 /*app.get('/', function(req, res) {
  // hiển thị view login và login message Mnếu nó tồn tại.

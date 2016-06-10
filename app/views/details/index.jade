@@ -15,40 +15,32 @@ block content
                 .product-essential
                   .product-img-box
                     .more-views-container
-
                         .product-image
-                          img#zoom_01(src='images/small/image1.png', data-zoom-image='images/large/image1.jpg')
+                          img#zoom_01( src='#{data[0].basicInfo.imgUrl}', data-zoom-image='#{data[0].basicInfo.imgUrl}')
                         ul
                           #gal1
-                            li
-                              a(href='#', data-image='images/small/image1.png', data-zoom-image='images/large/image1.jpg')
-                                img#zoom_01(src='images/thumb/image1.jpg')
-                            li
-                              a(href='#', data-image='images/small/image2.png', data-zoom-image='images/large/image2.jpg')
-                                img#zoom_01(src='images/thumb/image2.jpg')
-                            li
-                              a(href='#', data-image='images/small/image3.png', data-zoom-image='images/large/image3.jpg')
-                                img#zoom_01(src='images/thumb/image3.jpg')
-                            li
-                              a(href='#', data-image='images/small/image4.png', data-zoom-image='images/large/image4.jpg')
-                                img#zoom_01(src='images/thumb/image4.jpg')
+                            for image in data[0].basicInfo.listimgUrl
+                              li
+                                a(href='#', data-image='#{image}', data-zoom-image='#{image}')
+                                  img.listimg#zoom_01(src='#{image}' style="width:64px;height:85px; margin-left:10px;")
             .span1_of_1_des
               form.desc1(ng-submit='addToCart()')
-                h3 Ten san pham
-                h5 Gia san pham VND
+                h3 #{data[0].basicInfo.name}
+                h5 #{data[0].basicInfo.price} VND
                 .available
                   h4 Available Options :
                   ul
                     li
                       | Color:
                       select(ng-model='cart.color', required='')
-                        option(disabled='', selected='', value='') Select
-                        option(ng-repeat='item in product.color', value='Do') Do
+                        for color in data[0].color
+                          option(disabled='', selected='', value='#{color}') #{color}
                     li
                       | Size:
                       select(ng-model='cart.size', required='')
-                        option(disabled='', selected='', value='') Select
-                        option(ng-repeat='item in product.size', value='XL') XL
+                        for size in data[0].size
+                          option(disabled='', selected='', value='#{size}') #{size}
+
                     li
                       | Quantity:
                       input(style='height: 28px;', placeholder='Enter quantity', type='number', min='1', ng-model='cart.number', required='')
@@ -62,7 +54,7 @@ block content
                 li PRODUCT REVIEWS
                 .clear
               .box.visible
-                p.para.top Cho ghi phan mo ta san pham
+                p.para.top #{data[0].basicInfo.description}
               .box
                 .comments-container
                   h1(ng-hide='product.reviews.length', style='text-align: center;') Nothing here yet. Be the first to reivew.

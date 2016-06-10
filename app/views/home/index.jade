@@ -28,9 +28,10 @@ block content
 		.wrap
 			.main
 				.grids_of_3
+				p #{data[0].productID}
 					for product in data
 						.grid1_of_3
-							a(href='details.html')
+							a(href='#{product.productID}')
 								img(src='#{product.basicInfo.imgUrl}', alt='')
 								h3.dots3 #{product.basicInfo.name}
 								.price

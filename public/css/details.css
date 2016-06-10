@@ -31,11 +31,12 @@
     margin-top: 0px;
 }
 .product-image{
-    height: auto;
+  height: auto;
     width: 100%;
 }
 .product-image #zoom_01{
   width: 100% !important;
+  height: 300px !important;
 }
 /* Tabs*/
 .clear{
@@ -121,7 +122,6 @@
 
 body {
 	font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
-	background: #dee1e3;
 }
 
 /** ====================
