@@ -63,9 +63,10 @@ html.no-js(lang='en')
                       | Edit account
                       span.glyphicon.glyphicon-phone
                   li
-                    button.btn.btn-default(ng-click='logout()', style='background: #3b5998')
-                      | Logout
-                      span.glyphicon.glyphicon-phone
+                    form.logout(action="/logout", method="post")
+                      button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                        | Logout
+                        span.glyphicon.glyphicon-phone
           // - dăng xuất--
           
           // -login form--

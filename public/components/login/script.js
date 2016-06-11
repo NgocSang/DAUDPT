@@ -1,5 +1,5 @@
 // Button login is clicked
-$(document).ready(function() {
+$(document).ready(function(e) {
   $('#loginbtn.btn.btn-primary').click(function() {
       $('#modal-login').css('display', 'block');
       $('.modal-bg').fadeIn();
