@@ -1,0 +1,37 @@
+extends ../layouts/default.jade
+block content
+  link(rel='stylesheet', href='css/store.css')
+  #order-bar
+    form#formSearch
+      .search
+        label.label Name:
+        input.filter(ng-model='filterObject.name', type='text')
+      .search
+        label.label Color:
+        input.filter(type='text')
+      .search
+        label.label Size:
+        select.form-control.filter(name='size')
+          option(selected='', value='') All
+          option(value='1') 1
+      .search
+        label.label Price:
+        select.form-control.filter(name='size')
+          option(selected='', value='') All
+          option(value='1') Less than 200.000
+          option(value='2') From 200.000 to 500.000
+          option(value='3') From 500.000 to 1.000.00
+          option(value='4') Greater than 1.000.000
+  .main_bg
+    .wrap
+      .main
+        .grids_of_3
+          .grid1_of_3
+            a(href='details.html')
+              img(src='images/pic1.jpg', alt='')
+              h3.dots3 branded shoes
+              .price
+                h4 $300
+                  span indulge
+              span.b_btm
+          .clear

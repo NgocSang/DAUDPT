@@ -1,0 +1,47 @@
+extends ../layouts/default.jade
+block content
+	link(href='components/slider/slider.css', rel='stylesheet', type='text/css', media='all')
+	link(rel='stylesheet', href='components/index-css/owl.carousel.css')
+	div#da-slider.da-slider
+		div.da-slide
+
+			h2.product-name welcome to aditii
+			p.dots3 When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.
+			a.da-link(href='details.html') shop now
+			.da-img
+				img(src='images/slider1.png', alt='image01')
+		div.da-slide
+			h2 Easy management
+
+			p Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
+			a.da-link(href='details.html') shop now
+			.da-img
+				img(src='images/slider2.png', alt='image01')
+		nav.da-arrows
+			span.da-arrows-prev
+			span.da-arrows-next
+	.main_bg1
+		.wrap
+			.main1
+				h2 featured products
+	.main_bg
+		.wrap
+			.main
+				.grids_of_3
+				p #{data[0].productID}
+					for product in data
+						.grid1_of_3
+							a(href='#{product.productID}')
+								img(src='#{product.basicInfo.imgUrl}', alt='')
+								h3.dots3 #{product.basicInfo.name}
+								.price
+									h4 #{product.basicInfo.price}
+										span indulge
+								span.b_btm
+					.clear
+
+
+	script(type='text/javascript', src='components/index-js/modernizr.custom.28468.js')
+	script(type='text/javascript', src='components/index-js/jquery.cslider.js')
+	script(type='text/javascript', src='components/index-js/owl.carousel.js')
+	script(type='text/javascript', src='js/home.js')
