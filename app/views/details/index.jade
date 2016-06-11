@@ -2,6 +2,7 @@ extends ../layouts/default.jade
 block content
   link(rel='stylesheet', type='text/css', href='components/details-css/productviewgallery.css', media='all')
   link(rel='stylesheet', type='text/css', href='css/details.css', media='all')
+
   .main_bg
     .wrap
       .main
@@ -24,7 +25,6 @@ block content
                                 a(href='#', data-image='#{image}', data-zoom-image='#{image}')
                                   img.listimg#zoom_01(src='#{image}' style="width:64px;height:85px; margin-left:10px;")
             .span1_of_1_des
-              form.desc1(ng-submit='addToCart()')
                 h3 #{data[0].basicInfo.name}
                 h5 #{data[0].basicInfo.price} VND
                 .available
@@ -45,7 +45,7 @@ block content
                       | Quantity:
                       input(style='height: 28px;', placeholder='Enter quantity', type='number', min='1', ng-model='cart.number', required='')
                   .btn_form(style='width:100%;')
-                    input(type='submit', value='add to cart', title='', style='width:100%;')
+                    input(type='button', value='add to cart', title='', style='width:100%;')
                   .clear
             .clear
             .section
@@ -59,20 +59,23 @@ block content
                 .comments-container
                   h1(ng-hide='product.reviews.length', style='text-align: center;') Nothing here yet. Be the first to reivew.
                   ul#comments-list.comments-list
-                    li(ng-repeat='review in product.reviews')
-                      .comment-main-level
-                        .comment-avatar
-                          img(src='images/pic1.jpg', alt='Avatar')
-                        .comment-box
-                          .comment-head
-                            h6.comment-name ten nguoi de binh luan
-                            i.fa.fa-reply
-                            i.fa.fa-heart
-                          .comment-content
-                            p
-                              | Rating:
-                              span(style='color:#e4bb24;') Dinh de danh dau sao
-                            p Binh luan duoc viet
+                    #review
+                      if reviewpro[0] != null
+                        for review in reviewpro[0].comment
+                          li(ng-repeat='review in product.reviews')
+                            .comment-main-level
+                              .comment-avatar
+                                img(src='#{review.avatar}', alt='Avatar')
+                              .comment-box
+                                .comment-head
+                                  h6.comment-name #{review.name}
+                                  i.fa.fa-reply
+                                  i.fa.fa-heart
+                                .comment-content
+                                  p
+                                    | Rating:
+                                    span(style='color:#e4bb24;') #{review.rating}
+                                  p #{review.content}
                     li(ng-show='review.$value === null')
                       .comment-main-level
                         .comment-avatar
@@ -83,16 +86,29 @@ block content
                             i.fa.fa-reply
                             i.fa.fa-heart
                           .comment-content
-                            form(ng-submit='addReview()')
                               p
                                 | Rating:
-                                span(ng-repeat='number in [1, 2, 3, 4, 5]')
-                                  input(type='radio', name='rating', ng-model='review.rating', ng-value='number', required='')
-                                  |  Dinh cho danh gia sao
-                              textarea.form-control(rows='5', ng-model='review.content', required='')
-                              button.btn.btn-primary(type='submit', style='float:right;') Send
+                                span() 1
+                                  input(type='radio', name='rating', ng-model='review.rating', value='1', required='')
+                                span() 2
+                                  input(type='radio', name='rating', ng-model='review.rating', value='2', required='')
+                                span() 3
+                                  input(type='radio', name='rating', ng-model='review.rating', value='3', required='')
+                                span() 4
+                                  input(type='radio', name='rating', ng-model='review.rating', value='4', required='')
+                                span() 5
+                                  input(type='radio', name='rating', ng-model='review.rating', value='5', required='')
+                              textarea#message.form-control(rows='5', ng-model='review.content', required='')
+                              button.btn.btn-primary(onclick="Addcomment('#{data[0].productID}','http://studymovie.net/Cms_Data/Sites/admin/Themes/Default/images/default-avatar.jpg','sang')" style='float:right;') Send
             // end tabs
           .clear
+          //
+          button(onclick="something(#{data[0].basicInfo.description})") ádasđ
+          script.
+            var something = function(data) {
+            console.log('a')
+            }
+
   script(type='text/javascript', src='components/jquery/jquery.min.js')
   script(type='text/javascript', src='components/detail-js/jquery.elevatezoom.js')
   script(type='text/javascript', src='js/details.js')

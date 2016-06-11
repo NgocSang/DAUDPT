@@ -14,7 +14,6 @@ mongoose.connect('mongodb://localhost/DAUDPT');
 var db = mongoose.connection;
 var User = mongoose.model('User');
 var product = mongoose.model('products');
-
 module.exports = function (app, passport) {
 
 
@@ -35,6 +34,18 @@ module.exports = function (app, passport) {
     	}
     })
   });
+  app.get('/insertData', function(req, res) {
+  var User1 = new review({productID: "ABC"});
+  User1.save(function (err, data) {
+    if (err) {
+      res.send("Error" + err);
+    }
+    else {
+        res.json(data);
+        console.log("Success");
+    }
+  });
+});
   app.get('/store',function(req, res, next){
     res.render('store');
   });
@@ -44,19 +55,74 @@ module.exports = function (app, passport) {
   app.get('/:id',function(req, res, next){
     var productID = req.params.id;
     var detailsproduct = db.model('products');
+    var reviewproduct = db.model('reviews');
     detailsproduct.find({'productID':productID}).exec(function(err, data){
       if(err){
   		    res.send("Errors");
     	}
       else
     	{
-    		//res.json(data);
-        console.log("vo ham detail");
-        console.log(data);
+        console.log("vo detail product");
+        console.log(data[0]);
+        reviewproduct.find({'productID':productID}).exec(function(err, reviewpro){
+          if(err){
+            res.send('Errors');
+          }
+          else{
+            console.log("vo review");
+            console.log(reviewpro[0]);
+            res.render('details', {data: data, reviewpro: reviewpro});
+          }
+        });
 
-    		res.render('details', {data: data});
     	}
 
+    });
+  });
+  app.post('/:id', function(req, res){
+    var reviewproduct = db.model('reviews');
+    var productID = req.body.productID;
+    console.log('id san pham' + productID);
+    var reviewed = {
+        avatar:req.body.comment.avatar,
+        content:req.body.comment.content,
+        name:req.body.comment.name,
+        rating:req.body.comment.rating
+      };
+    reviewproduct.findOne({'productID':productID}).exec(function(err, reviewpro){
+      if(err){
+        res.send('Errors');
+      }
+      else{
+        if (reviewpro)
+        {
+          console.log(reviewpro);
+          reviewproduct.update({productID:productID},{$push:{comment:reviewed}}).exec(function(err, data){
+            if(err){
+              res.send('Erorr');
+            }
+            else{
+              console.log('Thanh cong');
+              res.send({success:true, data:reviewed});
+            }
+          });
+        }
+        else{
+
+          var reviweproduct = new review({productID:productID, comment:reviewed });
+          reviweproduct.save(function(err, data){
+            if(err){
+              res.send('Error');
+
+            }
+            else {
+
+              console.log('Them thanh cong');
+              res.send({success:true, data:reviewed});
+            }
+          });
+        }
+      }
     });
   });
 /*app.get('/', function(req, res) {
