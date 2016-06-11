@@ -63,7 +63,7 @@ module.exports = function (app, passport) {
   app.post('/login', passport.authenticate('login', {
     successRedirect : '/home',
     // Chuyển về trang thông tin cá nhân nếu đăng ký thành công
-    failureRedirect : '/login',
+    failureRedirect : '/',
     // Điều hướng về lại trang đăng nhập nếu có lỗi
     failureFlash : true // cho phép flash messages
   }));
@@ -76,13 +76,25 @@ module.exports = function (app, passport) {
   app.post('/signup', passport.authenticate('signup', {
     successRedirect : '/home',
     // Chuyển về trang thông tin cá nhân nếu đăng ký thành công
-    failureRedirect : '/signup',
+    failureRedirect : '/',
     // Điều hướng về lại trang đăng ký nếu có lỗi
     failureFlash : true // cho phép flash messages
   }));
   //==========================================================
   //==========================================================
 
+  //==========================================================
+  //==============LOGIN WITH FACEBOOK=========================
+  //==========================================================
+  app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+    // Xử lý sau khi facebook xác thực thành viên
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+      successRedirect : '/home',
+      failureRedirect : '/'
+  }));
+    //==========================================================
+  //==========================================================
   app.use(function (err, req, res, next) {
     // treat as 404
     if (err.message

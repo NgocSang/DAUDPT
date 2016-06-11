@@ -6,8 +6,10 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
+var configAuth = require('./env/development');
 var local = require('./passport/local');
 var LocalStrategy = require('passport-local').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 /**
  * Expose
@@ -80,7 +82,38 @@ module.exports = function (passport, config) {
    
   }));
 
-
+  //======================================================================
+//============================LOGIN WITH FACEBOOK=======================
+//======================================================================
+  passport.use(new FacebookStrategy({
+    clientID : configAuth.facebook.clientID,
+    clientSecret : configAuth.facebook.clientSecret,
+    callbackURL : configAuth.facebook.callbackURL,
+    passReqToCallback : true,
+    profileFields: ['id', 'displayName', 'photos', 'emails']
+  },
+  function(req, token, refreshToken, profile, done) {
+    process.nextTick( function() {
+      User.findOne({'email' : profile.emails[0].value},
+        function(err, user) {
+          if(err)
+            return done(err);
+          if(user) {
+            return done(null, user);
+          }
+          else {
+            var newUser = new User();
+            newUser.username = profile.displayName;
+            newUser.email = profile.emails[0].value;
+            newUser.save(function(err) {
+              if(err)
+                throw err;
+              return done(null, newUser);
+            })
+          }
+        })
+    })
+  }));
 
   // serialize sessions
   passport.serializeUser(function(user, done) {
