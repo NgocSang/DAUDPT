@@ -50,19 +50,22 @@ html.no-js(lang='en')
                 i#cart Cart
           // start login sang
           #login(ng-show='!authData')
+            if user == null
               button.btn.btn-primary(type='button' id = 'loginbtn') Login
-          // form login
-          // - dăng xuất--
-          #login(ng-show='authData')
-            .dropdown
-              button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
-                | Hello,
-                span.caret
-              ul.dropdown-menu
-                li
-                  button.btn.btn-default(ng-click='logout()', style='background: #3b5998')
-                    | Logout
-                    span.glyphicon.glyphicon-phone
+            else
+              .dropdown
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
+                  | Hello #{user.username},
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    button.btn.btn-default(ng-click='editacc()', style='background: #3b5998')
+                      | Edit account
+                      span.glyphicon.glyphicon-phone
+                  li
+                    button.btn.btn-default(ng-click='logout()', style='background: #3b5998')
+                      | Logout
+                      span.glyphicon.glyphicon-phone
           // - dăng xuất--
           
           // -login form--

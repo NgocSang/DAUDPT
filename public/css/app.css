@@ -1376,3 +1376,17 @@ p.para{
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.dropdown-menu li{
+    
+    width: 90%;
+    height: auto;
+    padding: 0px;
+    margin: 5px;
+
+}
+.dropdown-menu li button{
+    width: 100%;
+    height: auto;
+
+}

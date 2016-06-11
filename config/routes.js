@@ -17,6 +17,7 @@ module.exports = function (app, passport) {
 
   app.get('/home',function(req, res, next){
     var listproduct = db.model('products');
+    user = req.user;
     listproduct.find({'featured':'true'}).exec(function(err, data){
       if(err){
   		    res.send("Errors");
@@ -26,7 +27,7 @@ module.exports = function (app, passport) {
     		//res.json(data);
         console.log(data);
     		console.log("Success");
-    		res.render('home', {data: data});
+    		res.render('home', {data: data, user: req.user});
     	}
     })
   });
@@ -54,6 +55,33 @@ module.exports = function (app, passport) {
 
     });
   });
+
+
+  //==========================================================
+  //====================LOGIN=================================
+  //==========================================================
+  app.post('/login', passport.authenticate('login', {
+    successRedirect : '/home',
+    // Chuyển về trang thông tin cá nhân nếu đăng ký thành công
+    failureRedirect : '/login',
+    // Điều hướng về lại trang đăng nhập nếu có lỗi
+    failureFlash : true // cho phép flash messages
+  }));
+  //==========================================================
+  //==========================================================
+
+  //==========================================================
+  //====================SIGNUP================================
+  //==========================================================
+  app.post('/signup', passport.authenticate('signup', {
+    successRedirect : '/home',
+    // Chuyển về trang thông tin cá nhân nếu đăng ký thành công
+    failureRedirect : '/signup',
+    // Điều hướng về lại trang đăng ký nếu có lỗi
+    failureFlash : true // cho phép flash messages
+  }));
+  //==========================================================
+  //==========================================================
 
   app.use(function (err, req, res, next) {
     // treat as 404

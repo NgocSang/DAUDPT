@@ -14,6 +14,74 @@ var LocalStrategy = require('passport-local').Strategy;
  */
 
 module.exports = function (passport, config) {
+
+	//=========================================================
+  //====================LOGIN=================================
+  //==========================================================
+  passport.use('login', new LocalStrategy({
+  usernameField : 'username',
+  passwordField : 'password',
+  passReqToCallback : true
+  },
+  
+  function(req, username, password, done) {
+    process.nextTick(function() {
+      User.findOne({ 'username' : username }, function(err, user) {
+        if (err)
+          return done(err);
+
+        if (!user || !user.validPassword(password))
+          return done(null, false, req.flash('loginMessage',
+            'Tên truy cập hoặc mật khẩu không chính xác'));
+      // thực hiện thành công thì trả về thông tin user
+        else
+          return done(null, user);
+      });
+    });
+  }));
+
+//====================SIGN UP=================================
+  //==========================================================
+  passport.use('signup', new LocalStrategy({
+    usernameField : 'username',
+    passwordField : 'password',
+    passReqToCallback : true
+  },
+  function(req, username, password, done) {
+   
+    process.nextTick(function() {
+   
+    // kiểm tra xem username đã được sử dụng hay chưa
+      User.findOne({'username': username}, function(err, existingUser) {
+        if (err)
+          return done(err);
+     
+      // nếu tồn tại user với username này rồi thì báo lỗi
+        if (existingUser)
+          return done(null, false, req.flash('signupMessage',
+            'Tên truy cập đã tồn tại, vui lòng chọn tên khác.'));
+      // Ngược lại thì tạo mới user
+        else {
+          var newUser = new User();
+          newUser.username = req.body.username;
+          newUser.email = req.body.email;
+          newUser.password = newUser.generateHash(password);
+     
+          newUser.save(function(err) {
+            if (err)
+              throw err;
+     
+            return done(null, newUser, req.flash('signupMessage',
+            'Đăng ký tài khoản thành công!'));
+          });
+        }
+      });
+    });
+   
+  }));
+
+
+
   // serialize sessions
   passport.serializeUser(function(user, done) {
     done(null, user.id)
