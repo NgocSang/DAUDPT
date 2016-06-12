@@ -17,6 +17,9 @@ html.no-js(lang='en')
     script(type='text/javascript', src='components/jquery/jquery.min.js')
     script(type='text/javascript', src='components/boostrap-js/bootstrap.min.js')
     script(type='text/javascript', src='components/angular/angular.min.js')
+    script(src='https://code.jquery.com/ui/1.11.4/jquery-ui.js')
+    script(type='text/javascript', src='//api.filestackapi.com/filestack.js')
+
   body()
     .header_bg()
       #topwebsite
@@ -72,6 +75,8 @@ html.no-js(lang='en')
                       button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
                         | Logout
                         span.glyphicon.glyphicon-phone
+                  li
+                    input(type='filepicker', data-fp-apikey='AeNIdjegwSXSYhQ2xcmojz', onchange='Ham(event.fpfile.url, "#{user.email}")')
           // form login
           // -login form--
           //TamNguyen
@@ -153,10 +158,12 @@ html.no-js(lang='en')
                 input(type='submit', value='')
             .clear
           .clear
+
     block content
     // //r
     // start slider
     // start footer
+
     .footer_bg1()
       .wrap
         .footer
@@ -175,4 +182,5 @@ html.no-js(lang='en')
     script(src='components/angularfire/angularfire.min.js')
 
     script(src='components/login/script.js')
+    script(src='js/script.js')
     script(src='components/responsive-menu/responsive.menu.js')

@@ -21,7 +21,7 @@ module.exports = function (app, passport) {
   //====================LOGIN=================================
   //==========================================================
   app.post('/login', passport.authenticate('login', {
-    successRedirect : '/home',
+    successRedirect : '/',
     // Chuyển về trang thông tin cá nhân nếu đăng ký thành công
     failureRedirect : '/',
     // Điều hướng về lại trang đăng nhập nếu có lỗi
@@ -34,7 +34,7 @@ module.exports = function (app, passport) {
   //====================SIGNUP================================
   //==========================================================
   app.post('/signup', passport.authenticate('signup', {
-    successRedirect : '/home',
+    successRedirect : '/',
     // Chuyển về trang thông tin cá nhân nếu đăng ký thành công
     failureRedirect : '/',
     // Điều hướng về lại trang đăng ký nếu có lỗi
@@ -44,7 +44,7 @@ module.exports = function (app, passport) {
   //==========================================================
   app.post('/logout', function(req, res){
     req.logOut();
-    res.redirect('/home');
+    res.redirect('/');
     console.log( "logout");
   });
   //==========================================================
@@ -54,7 +54,7 @@ module.exports = function (app, passport) {
 
     // Xử lý sau khi facebook xác thực thành viên
     app.get('/auth/facebook/callback', passport.authenticate('facebook', {
-      successRedirect : '/home',
+      successRedirect : '/',
       failureRedirect : '/'
   }));
     //==========================================================
@@ -63,7 +63,7 @@ module.exports = function (app, passport) {
 
     // the callback after google has authenticated the user
     app.get('/auth/google/callback', passport.authenticate('google', {
-      successRedirect : '/home',
+      successRedirect : '/',
       failureRedirect : '/'
   }));
   //=============================================================
@@ -99,7 +99,20 @@ module.exports = function (app, passport) {
     	}
     })
   });
+app.post('/',function(req, res, next){
+  console.log(req.body.email);
+  console.log(req.body.avatar);
+  var changuser = db.model('User');
+  changuser.update({email:req.body.email},{avatar:req.body.avatar}).exec(function(err, data){
+    if(err){
+      res.send('Error');
+    }else{
+      res.send({success:true});
 
+    }
+  });
+
+});
 app.get('/cart',function(req, res, next){
   var cartproduct = db.model('carts');
   cartproduct.findOne({email:req.user.email}).exec(function(err, listcart){
