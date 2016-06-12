@@ -13,6 +13,8 @@ html.no-js(lang='en')
 
     link(rel='stylesheet', href='css/app.css')
     link(rel='stylesheet', href='css/login-signup.css')
+    link(rel='stylesheet', href='css/editUser.css')
+
 
     script(type='text/javascript', src='components/jquery/jquery.min.js')
     script(type='text/javascript', src='components/boostrap-js/bootstrap.min.js')
@@ -55,18 +57,25 @@ html.no-js(lang='en')
             else
               .dropdown
                 button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
-                  | Hello #{user.username},
+                  | Hello #{user.fullname},
                   span.caret
                 ul.dropdown-menu
-                  li
-                    button.btn.btn-default(ng-click='editacc()', style='background: #3b5998')
-                      | Edit account
-                      span.glyphicon.glyphicon-phone
-                  li
-                    form.logout(action="/logout", method="post")
-                      button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
-                        | Logout
+                  if user.password != null
+                    li
+                      button.btn.btn-default(onclick='editUser()', style='background: #3b5998')
+                        | Edit account
                         span.glyphicon.glyphicon-phone
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
+                  else  
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
           // - dăng xuất--
           
           // -login form--
@@ -80,7 +89,7 @@ html.no-js(lang='en')
 
                   form.login-form(action='/login', method='post')
                     p.email
-                      input(name="username" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="User name" id="username")
+                      input(name="email" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
                     br
                     p.password
                       input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Password" id="password")
@@ -101,7 +110,7 @@ html.no-js(lang='en')
 
                   form.register-form(action='/signup', method='post')
                     p.fullname
-                      input(name="username" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="User name" id="username")
+                      input(name="fullname" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Full name" id="fullname")
                     br
                     p.email
                       input(name="email" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
@@ -112,7 +121,7 @@ html.no-js(lang='en')
                     button CONFIRM
 
                     p.message ALREADY REGISTERED? <a href="/" id="refLogin"> SIGN IN </a>
-
+          
 
           // -create account form--
           .h_search

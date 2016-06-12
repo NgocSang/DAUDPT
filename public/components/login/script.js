@@ -26,9 +26,9 @@ $(document).ready(function() {
 
 // close symbol of signup form is clicked
 $(document).ready(function() {
-  $('a#editacc.close').on('click', function(){
+  $('a#editUser.close').on('click', function(){
     $('.modal-bg').fadeOut();   
-    $('#modal-editacc').fadeOut();
+    $('#modal-editUser').fadeOut();
     return false;
   });
 });
