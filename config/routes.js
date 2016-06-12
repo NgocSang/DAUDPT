@@ -69,7 +69,7 @@ module.exports = function (app, passport) {
   //=============================================================
   //=============================================================
 
-  app.get('/home',function(req, res, next){
+  app.get('/',function(req, res, next){
     var listproduct = db.model('products');
 
     console.log("Success");
@@ -156,10 +156,13 @@ app.get('/cart',function(req, res, next){
 
   */
   app.get('/store',function(req, res, next){
-    res.render('store');
+    res.render('store',{user:req.user});
   });
   app.get('/contact',function(req, res, next){
-    res.render('contact');
+    res.render('contact', {user:req.user});
+  });
+  app.get('/services',function(req, res, next){
+    res.render('services', {user:req.user});
   });
   app.get('/:id',function(req, res, next){
     var productID = req.params.id;

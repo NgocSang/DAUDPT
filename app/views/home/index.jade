@@ -30,9 +30,9 @@ block content
 				.grids_of_3
 				p #{data[0].productID}
 					for product in data
-						.grid1_of_3
+						.grid1_of_3(class="animated zoomIn")
 							a(href='#{product.productID}')
-								img(src='#{product.basicInfo.imgUrl}', alt='')
+								img.product-image(src='#{product.basicInfo.imgUrl}', alt='product')
 								h3.dots3 #{product.basicInfo.name}
 								.price
 									h4 #{product.basicInfo.price}

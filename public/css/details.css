@@ -374,5 +374,8 @@ body {
 .glyphicon-star{
     color: yellow;
 }
-
+.product-image:hover
+{
+    animation: 0s rubberBand;
+}
 /**/

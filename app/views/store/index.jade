@@ -3,18 +3,18 @@ block content
   link(rel='stylesheet', href='css/store.css')
   #order-bar
     form#formSearch
-      .search
+      .search(class="search animated bounceInLeft")
         label.label Name:
         input.filter(ng-model='filterObject.name', type='text')
-      .search
+      .search(class="search animated zoomIn")
         label.label Color:
         input.filter(type='text')
-      .search
+      .search(class="search animated zoomIn")
         label.label Size:
         select.form-control.filter(name='size')
           option(selected='', value='') All
           option(value='1') 1
-      .search
+      .search( class="search animated bounceInRight")
         label.label Price:
         select.form-control.filter(name='size')
           option(selected='', value='') All
@@ -26,7 +26,7 @@ block content
     .wrap
       .main
         .grids_of_3
-          .grid1_of_3
+          .grid1_of_3(class="animated zoomIn")
             a(href='details.html')
               img(src='images/pic1.jpg', alt='')
               h3.dots3 branded shoes
