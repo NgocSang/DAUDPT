@@ -25,6 +25,7 @@ block content
                                 a(href='#', data-image='#{image}', data-zoom-image='#{image}')
                                   img.listimg#zoom_01(src='#{image}' style="width:64px;height:85px; margin-left:10px;")
             .span1_of_1_des
+              .desc1
                 h3 #{data[0].basicInfo.name}
                 h5 #{data[0].basicInfo.price} VND
                 .available
@@ -32,20 +33,23 @@ block content
                   ul
                     li
                       | Color:
-                      select(ng-model='cart.color', required='')
+                      select#selectcolor(ng-model='cart.color', required='')
                         for color in data[0].color
-                          option(disabled='', selected='', value='#{color}') #{color}
+                          option( selected='', value='#{color}') #{color}
                     li
                       | Size:
-                      select(ng-model='cart.size', required='')
+                      select#selectsize(ng-model='cart.size', required='')
                         for size in data[0].size
-                          option(disabled='', selected='', value='#{size}') #{size}
+                          option(selected='', value='#{size}') #{size}
 
                     li
                       | Quantity:
-                      input(style='height: 28px;', placeholder='Enter quantity', type='number', min='1', ng-model='cart.number', required='')
+                      input#selectnumber(style='height: 28px;', placeholder='Enter quantity', type='number', min='1', ng-model='cart.number', required='')
                   .btn_form(style='width:100%;')
-                    input(type='button', value='add to cart', title='', style='width:100%;')
+                    if user != null
+                      button.btn.btn-primary(onclick="Addcart('#{data[0].productID}', '#{user.email}','#{data[0].basicInfo.name}','#{data[0].basicInfo.price}', '#{data[0].basicInfo.imgUrl}')", style='width:100%;') add to cart
+                    else
+                      button.btn.btn-primary(onclick="window.alert('please login')", style='width:100%;') add to cart
                   .clear
             .clear
             .section
@@ -76,31 +80,33 @@ block content
                                     | Rating:
                                     span(style='color:#e4bb24;') #{review.rating}
                                   p #{review.content}
-                    li(ng-show='review.$value === null')
-                      .comment-main-level
-                        .comment-avatar
-                          img(src='images/pic1.jpg', alt='Avatar')
-                        .comment-box
-                          .comment-head
-                            h6.comment-name Ten ngươi đang nhap dinh viet
-                            i.fa.fa-reply
-                            i.fa.fa-heart
-                          .comment-content
-                              p
-                                | Rating:
-                                span() 1
-                                  input(type='radio', name='rating', ng-model='review.rating', value='1', required='')
-                                span() 2
-                                  input(type='radio', name='rating', ng-model='review.rating', value='2', required='')
-                                span() 3
-                                  input(type='radio', name='rating', ng-model='review.rating', value='3', required='')
-                                span() 4
-                                  input(type='radio', name='rating', ng-model='review.rating', value='4', required='')
-                                span() 5
-                                  input(type='radio', name='rating', ng-model='review.rating', value='5', required='')
-                              textarea#message.form-control(rows='5', ng-model='review.content', required='')
-                              button.btn.btn-primary(onclick="Addcomment('#{data[0].productID}','http://studymovie.net/Cms_Data/Sites/admin/Themes/Default/images/default-avatar.jpg','sang')" style='float:right;') Send
-            // end tabs
+                    if user != null
+                      li(ng-show='review.$value === null')
+                        .comment-main-level
+                          .comment-avatar
+                            img(src='#{user.avatar}', alt='Avatar')
+                          .comment-box
+                            .comment-head
+                              h6.comment-name #{user.username}
+                              i.fa.fa-reply
+                              i.fa.fa-heart
+                            .comment-content
+                                p
+                                  | Rating:
+                                  span(style='margin-left:') 1
+                                    input(type='radio', name='rating', value='1', required='')
+                                  span() 2
+                                    input(type='radio', name='rating', value='2', required='')
+                                  span() 3
+                                    input(type='radio', name='rating', value='3', required='')
+                                  span() 4
+                                    input(type='radio', name='rating', value='4', required='')
+                                  span() 5
+                                    input(type='radio', name='rating', value='5', required='')
+
+                                textarea#message.form-control(rows='5', required='')
+                                button.btn.btn-primary(onclick="Addcomment('#{data[0].productID}','#{user.avatar}','#{user.username}')" style='float:right;') Send
+              // end tabs
           .clear
           //
           button(onclick="something(#{data[0].basicInfo.description})") ádasđ

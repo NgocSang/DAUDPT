@@ -28,7 +28,7 @@ app.set('io', io);
 
 
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(express.static(__dirname + 'public'));
 // Connect to mongodb
 var connect = function () {
   var options = { server: { socketOptions: { keepAlive: 1 } } };

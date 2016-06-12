@@ -1,0 +1,61 @@
+extends ../layouts/default.jade
+block content
+  link(rel='stylesheet',type='text/css', href='css/cart.css')
+  .row
+    .col-sm-23
+      .row.breadcrumb-wrapper
+        .col-sm-15
+          ol.breadcrumb
+            li
+              a(href='#')
+                i.glyphicon.glyphicon-home
+                |  DAS
+            li.active
+              | Your cart
+  .row(ng-controller="control" ng-app='App')
+    #information.col-sm-12.col-md-6
+      h4 Receiver's information
+      form(name='contactForm')
+        .form-group
+          label Name
+          input#txtCustomerName.required.form-control(type='text' ng-model="name" required style="width:100%;")
+        .form-group
+          label Phone number
+          input#txtPhone.required.form-control( type='text' ng-model="phone" required style="width:100%;")
+        .form-group
+          label Email
+          input#txtEmail.required.form-control(name='email' ng-model="email" type='email' required style="width:100%;")
+        .form-group
+          label Address
+          textarea#txtNote.required.form-control(row='4' ng-model="address" required style="width:100%;")
+        if listcart != null
+          button#order.js-btnPlaceOrder.btn.btn-info.fw(ng-disabled = "contactForm.$invalid" ng-click="addOrder(#{JSON.stringify(listcart.cart)},'#{user.email}')") Order
+    #products
+      if listcart != null
+        h4 Order details
+        table.table
+          for cart in listcart.cart
+            tr.item-row()
+                td.cart-img
+                  img.img-responsive(src='#{cart.imgUrl}')
+                td
+                  div
+                    h4 #{cart.name}
+                    p Color: #{cart.color}
+                    p Number: #{cart.number}
+                  div Price: #{cart.price}
+                  div
+                    form
+                      table
+                        tr
+                          td.change-cart
+                            input.cart-amount.form-control(value='#{cart.number}', type='number', min='1', max='10' disabled)
+                          td.remove-item.change-cart(ng-click="removeItem('#{cart.id}','#{user.email}')")
+                            a.glyphicon.glyphicon-remove(style='margin-left:10px;')
+        hr
+      if listcart == null
+        h3.empty-cart() Your cart is empty. Please go back to shop and add product.
+
+  script(type='text/javascript', src='components/jquery/jquery.min.js')
+  script(type='text/javascript', src='js/cart.js')
+  script(type='text/javascript', src='js/angular.js')
