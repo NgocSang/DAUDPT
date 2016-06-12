@@ -103,13 +103,14 @@ module.exports = function (passport, config) {
             return done(null, user);
           }
           else {
-            var newUser1 = new User();
-            newUser1.username = profile.displayName;
-            newUser1.email = profile.emails[0].value;
-            newUser1.save(function(err) {
+            var newUserFB = new User();
+            newUserFB.username = profile.displayName;
+            newUserFB.email = profile.emails[0].value;
+            newUserFB.avatar = profile.photos[0].value;
+            newUserFB.save(function(err) {
               if(err)
                 throw err;
-              return done(null, newUser1);
+              return done(null, newUserFB);
 
             })
           }
@@ -133,19 +134,17 @@ module.exports = function (passport, config) {
         if(user) {
           return done(null, user);
         } else {
-          var newUSer2 = new User();
-          newUSer2.google.id = profile.id;
-          newUSer2.google.token = token;
-          newUSer2.google.name = profile.displayName;
-          newUSer2.google.email = profile.emails[0].value;
+          var newUSerGG = new User();
+          newUSerGG.userid = profile.id;
+          newUSerGG.token = token;
+          newUSerGG.username = profile.displayName;
+          newUSerGG.email = profile.emails[0].value;
 
-          newUSer2.save(function(err) {
+          newUSerGG.save(function(err) {
             if (err) {
               throw err;
             }
-            console.log("vo ham goole tra ra ket qua");
-            console.log(newUSer2);
-            return done(null, newUSer2);
+            return done(null, newUSerGG);
           });
         }
       });
