@@ -16,8 +16,8 @@ module.exports = {
     ]
   },
   google: {
-    clientID: 'APP_ID',
-    clientSecret: 'SECRET',
+    clientID: '608277780696-e8a1pmicvbq1jho6u1toihlo5o7ltlli.apps.googleusercontent.com',
+    clientSecret: 'FeIu5sq5V3oUR9IP7KVbWorK',
     callbackURL: 'http://localhost:3000/auth/google/callback',
     scope: [
       'https://www.googleapis.com/auth/userinfo.profile',

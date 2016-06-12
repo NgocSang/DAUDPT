@@ -97,8 +97,16 @@ module.exports = function (app, passport) {
       successRedirect : '/home',
       failureRedirect : '/'
   }));
-    //==========================================================
   //==========================================================
+  //==========================================================
+  app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+
+    // the callback after google has authenticated the user
+    app.get('/auth/google/callback', passport.authenticate('google', {
+      successRedirect : '/home',
+      failureRedirect : '/'
+  }));
+  //================================================================
   app.use(function (err, req, res, next) {
     // treat as 404
     if (err.message

@@ -6,16 +6,20 @@
 var mongoose = require('mongoose');
 //var userPlugin = require('mongoose-user');
 var bcrypt = require('bcrypt-nodejs');
-var Schema = mongoose.Schema;
 
 /**
  * User schema
  */
 
-var UserSchema = new Schema({
-  username: {type: 'String', required: true},
-  email: {type: 'String', required: true},
-  password: {type: 'String', default: null},
+var UserSchema =  mongoose.Schema({
+  username: {type: String},
+  email: {type:  String},
+  password: {type:String},
+  google:{	id: {type: String},
+			token: {type: String},
+			name: {type: String},
+			email: {type:String}
+	},
 });
 
 /**
@@ -58,5 +62,5 @@ UserSchema.static({
 /**
  * Register
  */
-
-module.exports = mongoose.model('User', UserSchema);
+var User = mongoose.model('User', UserSchema);
+module.exports = User;
