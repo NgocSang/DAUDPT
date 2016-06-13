@@ -1270,7 +1270,7 @@ p.para{
 }
 /*Phần CSS sáng viết*/
 #topwebsite{
-    width: 95%;
+    width: 90%;
     overflow: hidden;
     display: block;
     height: auto;
@@ -1320,14 +1320,9 @@ p.para{
     font-family: 'Source Sans Pro', sans-serif;
     color: white !important;
 }
-
-#btnlogin{
-    clear: right;
-
-    width: 350px;
-
-    margin: auto;
-    margin-top: 20px;
+#login .dropdown-menu li button{
+    width: 200px;
+    margin-top: 5px;
 }
 #cart{
 
@@ -1376,17 +1371,7 @@ p.para{
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.dropdown-menu li{
-    
-    width: 90%;
-    height: auto;
-    padding: 0px;
-    margin: 5px;
-
-}
-.dropdown-menu li button{
-    width: 100%;
-    height: auto;
-
+.product-image:hover
+{
+    animation: 2s rubberBand;
 }
