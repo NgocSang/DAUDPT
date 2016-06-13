@@ -14,7 +14,8 @@ var product = mongoose.model('products');
 var cart = mongoose.model('carts');
 var review = mongoose.model('reviews');
 var order = mongoose.model('oders');
-var ObjectID = require('mongodb').ObjectID;
+var edit = require('editUser');
+
 module.exports = function (app, passport) {
 
   //==========================================================
@@ -47,6 +48,30 @@ module.exports = function (app, passport) {
     res.redirect('/');
     console.log( "logout");
   });
+
+  app.post('/editUser', function(req, res){
+    if (req.user == null){
+      res.redirect('/');
+    } else{
+      console.log("ola");
+      edit.editUser(req.user, 
+      {
+        id    : req.user._id,
+        fullname  : req.body.fullname,
+        newpassword  : req.user.generateHash(req.body.newpassword),
+        email: req.body.email,
+      }, function(e, o){
+        if (e){
+          console.log("alo");
+          console.log(e);
+        } else{
+          console.log("olaalo");
+          req.user = o;
+          res.redirect('/');
+        }
+      });
+    }
+  });
   //==========================================================
   //==============LOGIN WITH FACEBOOK=========================
   //==========================================================
@@ -68,7 +93,8 @@ module.exports = function (app, passport) {
   }));
   //=============================================================
   //=============================================================
-  
+
+  //=============================================================
   app.get('/',function(req, res, next){
     var listproduct = db.model('products');
 

@@ -124,7 +124,7 @@ html.no-js(lang='en')
               div.login-page
                 div.form
                   a#editUser.close(href='/') &#215
-                  form.edit-form(action='/edit', method='post') 
+                  form.edit-form(action='/editUser', method='post') 
                     p.fullname
                       input(name="fullname" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Full name" id="fullname" value="#{user.fullname}")
                     br
@@ -132,7 +132,7 @@ html.no-js(lang='en')
                       input(name="email" type="email" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email" value="#{user.email}")
                     br
                     p.password
-                      input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="New password" id="password" ) 
+                      input(name="newpassword" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="New password" id="newpassword" ) 
                     br
                     p.confirmpassword
                       input(name="confirmpassword" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Confirm password" id="confirmpassword") 
