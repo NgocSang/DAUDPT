@@ -1,0 +1,172 @@
+doctype html
+
+html.no-js(lang='en')
+  // <![endif]
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Cửa hàng DAS
+    meta(name='description', content='Bán hàng online')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='components/boostrap/bootstrap.min.css')
+    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/app.css')
+    script(type='text/javascript', src='components/jquery/jquery.min.js')
+    script(type='text/javascript', src='components/boostrap-js/bootstrap.min.js')
+  body
+    .header_bg()
+      #topwebsite
+        .content-topwebsite
+          .content-topwebsite(data-toggle='tooltip', data-placement='bottom', title='Tam')
+            img(src='images/clock.png')
+            h3 THỜI GIAN
+            p 08:30 sáng - 10:00 tối
+        .content-topwebsite(data-toggle='tooltip', data-placement='bottom', title='Get update on what  is sharing public')
+          img(src='images/car.png')
+          h3 GIAO HÀNG TOÀN QUỐC
+          p Miễn phí khi mua nhiều
+        .content-topwebsite
+          img(src='images/phone.png')
+          h3 ĐẶT HÀNG NHANH
+          p (08) 7307 1441
+        .content-topwebsite
+          h3 BẢO HÀNH 365 NGÀY
+          p Đổi trả trong 7 ngày
+      .wrap
+        .header
+          .logo
+            a(ng-href='#')
+              img(height='45', width='110', src='images/logo.png', alt='')
+          .h_icon(style='height:70px;border:1px solid white;')
+            ul.icon1.sub-icon1(ng-show='authData')
+              li
+                i#number 0
+              li
+                a.active-icon.c1(ng-href='#/cart')
+              li
+                i#cart Cart
+          // start login sang
+          #login(ng-show='!authData')
+            .dropdown
+              button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
+                | Login
+                span.caret
+              ul.dropdown-menu
+                li
+                  button#loginbtn.btn.btn-primary
+                    | Login with Email
+                    span.glyphicon.glyphicon-log-in
+                li
+                  button.btn.btn-default(ng-click='loginFacebook()', style='background: #3b5998')
+                    | Login with facebook
+                    span.glyphicon.glyphicon-phone
+                li
+                  button#createbtn.btn.btn-primary
+                    | Create an account
+                    span.glyphicon.glyphicon-user
+          // form login
+          // - dăng xuất--
+          #login(ng-show='authData')
+            .dropdown
+              button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
+                | Hello,
+                span.caret
+              ul.dropdown-menu
+                li
+                  button.btn.btn-default(ng-click='logout()', style='background: #3b5998')
+                    | Logout
+                    span.glyphicon.glyphicon-phone
+          // - dăng xuất--
+          .modal-bg
+            #modal-login
+              .login-page
+                .form
+                  a#login-page.close(ng-href='#') &#215
+                  form.login-form(ng-submit='loginEmail()')
+                    p.email
+                      input#username.form-control.input-lg(ng-model='credential.email', name='username', type='email', placeholder='Email')
+                    br
+                    p.password
+                      input#password.form-control.input-lg(ng-model='credential.password', name='password', type='password', placeholder='Password')
+                      button#btnlogin.btn.btn-primary(type='submit') Login
+          // end login sang
+          .modalcreate-bg
+            #modal-create
+              .create-page
+                .form
+                  a#create-page.close(ng-href='#') &#215
+                  form.login-form(ng-submit='createUser()')
+                    p.userName
+                      input.form-control.input-lg(type='text', placeholder='Name', ng-model='createData.name', required='')
+                    br
+                    p.email
+                      input#email.form-control.input-lg(ng-model='createData.email', name='email', type='email', placeholder='Email')
+                    br
+                    p.password
+                      input#passwordcreate.form-control.input-lg(ng-model='createData.password', name='passwordcreate', type='password', placeholder='Password')
+                      br
+                      input#passwordconfirm.form-control.input-lg(ng-model='createData.confirm', name='passwordconfirm', type='password', placeholder='Password')
+                      button#btnlogin.btn.btn-primary(type='submit') Create
+          .h_search
+            form
+              input(type='text', value='')
+              input(type='submit', value='')
+          .clear
+    .header_btm
+      .wrap
+        .header_sub
+          .h_menu
+            ul
+              li.active
+                a(ng-href='#') Home
+              |  |
+              li
+                a(ng-href='#/store') Store
+              |  |
+              li
+                a(ng-href='#/services') Services
+              |  |
+              li
+                a(ng-href='#/contact') Contact us
+          .top-nav
+            nav.nav
+              a#w3-menu-trigger(ng-href='#')
+              ul.nav-list(style='')
+                li.nav-item
+                  a(href='/') Home
+                li.nav-item
+                  a(ng-href='#/store') Store
+                li.nav-item
+                  a(ng-href='#/services') Services
+                li.nav-item
+                  a(ng-href='#/contact') Contact us
+            .search_box
+              form
+                input(type='text', value='Search', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Search';}")
+                input(type='submit', value='')
+            .clear
+          .clear
+    block content
+    // //r
+    // start slider
+    // start footer
+    .footer_bg1()
+      .wrap
+        .footer
+          button#toTop(ng-click='scrollToTop()', style='display: block;')
+            span#toTopHover(style='opacity: 1;')
+          // end scroll_top_btn
+          .copy
+            p.link
+              | ©  All rights reserved | Designed by  
+              a(href='http://teamdas.esy.es/default.html')  DAS
+          .clear
+
+    script(src='components/angular/angular.min.js')
+    script(src='components/angular-route/angular-route.min.js')
+    script(src='components/firebase/firebase.js')
+    script(src='components/angularfire/angularfire.min.js')
+
+    script(src='components/login/script.js')
+    script(src='components/responsive-menu/responsive.menu.js')
