@@ -5,9 +5,8 @@
 
 
 var passport = require('passport');
-
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/DAUDPT');
+mongoose.connect('mongodb://sang:123456789@ds013574.mlab.com:13574/doanudpt');
 var db = mongoose.connection;
 var User = mongoose.model('User');
 var product = mongoose.model('products');
