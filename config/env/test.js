@@ -4,7 +4,7 @@
  */
 
 module.exports = {
-  db: 'mongodb://DAUDPT',
+  db: 'mongodb://sang:123456789@ds013574.mlab.com:13574/doanudpt',
   facebook: {
     clientID: '1729079927370976',
     clientSecret: 'c307074b1259b80252f64ca1734a93d1',
