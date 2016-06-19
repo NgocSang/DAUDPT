@@ -67,15 +67,22 @@ html.no-js(lang='en')
                   | Hello #{user.fullname},
                   span.caret
                 ul.dropdown-menu
-                  li
-                    button.btn.btn-default(id='editbtn' style='background: #3b5998')
-                      | Edit account
-                      span.glyphicon.glyphicon-phone
-                  li
-                    form.logout(action="/logout", method="post")
-                      button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
-                        | Logout
+                  if user.password != null
+                    li
+                      button.btn.btn-default(id='editbtn' style='background: #3b5998')
+                        | Edit account
                         span.glyphicon.glyphicon-phone
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
+                  else
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
                   li
                     input(type='filepicker', data-fp-apikey='AeNIdjegwSXSYhQ2xcmojz', onchange='Ham(event.fpfile.url, "#{user.email}")')
           // form login

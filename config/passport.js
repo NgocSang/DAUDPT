@@ -149,6 +149,7 @@ function(req, token, refreshToken, profile, done) {
           newUSerGG.token = token;
           newUSerGG.fullname = profile.displayName;
           newUSerGG.email = profile.emails[0].value;
+          newUSerGG.avatar = profile.photos[0].value;
 
           newUSerGG.save(function(err) {
             if (err) {
