@@ -1,63 +1,25 @@
-# Project - *QUẢN LÍ BÁN HÀNG*
+[![Build Status](https://img.shields.io/travis/madhums/node-express-mongoose.svg?style=flat)](https://travis-ci.org/madhums/node-express-mongoose)
+[![Gittip](https://img.shields.io/gratipay/madhums.svg?style=flat)](https://www.gratipay.com/madhums/)
+[![Dependencies](https://img.shields.io/david/madhums/node-express-mongoose.svg?style=flat)](https://david-dm.org/madhums/node-express-mongoose)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/madhums/node-express-mongoose?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-**Name of your app** Đây là trang web bán hàng
-Danh sách sinh viên: 
-					 **1312474 Triệu Xuân Quý  **
-					 **1312485 Nguyễn Ngọc Sáng  **
-					 **1312498 Trần Thị Sương  **
-					 **1312508 Nguyễn Đăng Thiện Tâm **
+## Node Express Mongoose
 
+A boilerplate application for building web apps using express, mongoose and passport.
 
+Read the [wiki](https://github.com/madhums/node-express-mongoose/wiki) to understand how the application is structured.
 
-## Chức năng
+## Installation and Usage
 
-Danh sách chức năng **bắt buộc**:
+    $ git clone https://github.com/madhums/node-express-mongoose.git
+    $ cd node-express-mongoose
+    $ npm install
+    $ npm start
 
-* [ ] Đăng ký tài khoản bằng email, password, và tên.
-* [ ] Đăng nhập bằng email và password.
-* [ ] Sau khi đăng nhập, người dùng được chuyển đến trang chủ và có quyền lựa chọn các chức năng khác
-* [ ] Đặt hàng, giỏ hàng 
-* [ ] Hỗ trợ trực tuyến
-* [ ] Giới thiệu sản phẩm
-* [ ] Thống kê số lượng bán hàng
-* [ ] Cập nhật, chỉnh sửa tài khoản người dùng.
-* [ ] Phân quyền sử dụng giữa người quản trị và người dùng
-* [ ] Upload, xóa sửa các file
+Add routes (`config/routes.js`), create models (`app/models/`), views (`app/views/`) and controllers (`app/controllers/`).
 
-Danh sách chức năng **phụ**:
-
-* [ ] Theo dõi số lượng người truy cập
-* [ ] Thống kê số lượng người truy cập theo tuần và tháng.
-* [ ] Thăm dò ý kiến.
-* [ ] đánh giá sản phẩm.
-* [ ] Người dùng có thể đăng nhập mạng xã hội và share tin tức.
-* [ ] Comment dưới bài viết.
-* [ ] Hiển thị vị trí của công ty ( kết nối google map).
-* [ ] Người dùng sẽ nhận được email thông báo khi họ nhận được tin nhắn khi đăng kí nhận tin tức.
-
-
-Here's a walkthrough of implemented user stories:
-
-![Video Walkthrough](relative-path-to-your-gif-file-on-github-or-absolute-path-to-file-on-imgur-or-youtube)
-
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
-URL : https://github.com/NgocSang/DAUDPT
-
-## Notes
-Describe any challenges encountered while building the app.
+Checkout the [apps that are built using this approach](https://github.com/madhums/node-express-mongoose/wiki/Apps-built-using-this-approach)
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-        http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
+MIT

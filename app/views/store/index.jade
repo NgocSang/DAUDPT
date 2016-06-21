@@ -1,0 +1,39 @@
+extends ../layouts/default.jade
+block content
+  link(rel='stylesheet', href='css/store.css')
+  #order-bar
+    form#formSearch
+      .search(class="search animated bounceInLeft")
+        label.label Name:
+        input.filter(ng-model='filterObject.name', type='text')
+      .search(class="search animated zoomIn")
+        label.label Color:
+        input.filter(type='text')
+      .search(class="search animated zoomIn")
+        label.label Size:
+        select.form-control.filter(name='size')
+          option(selected='', value='') All
+          option(value='1') 1
+      .search( class="search animated bounceInRight")
+        label.label Price:
+        select.form-control.filter(name='size')
+          option(selected='', value='') All
+          option(value='1') Less than 200.000
+          option(value='2') From 200.000 to 500.000
+          option(value='3') From 500.000 to 1.000.00
+          option(value='4') Greater than 1.000.000
+          input#search(type='button', value='Search') 
+  .main_bg
+    .wrap
+      .main
+        .grids_of_3         
+            for product in data
+              .grid1_of_3(class="animated zoomIn")
+                a(href='#{product.productID}')
+                  img.product-image(src='#{product.basicInfo.imgUrl}', alt='product')
+                  h3.dots3 #{product.basicInfo.name}
+                  .price
+                    h4 #{product.basicInfo.price}
+                      span indulge
+                  span.b_btm
+            .clear

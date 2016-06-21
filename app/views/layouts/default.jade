@@ -1,0 +1,213 @@
+doctype html
+
+html.no-js(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    title Cửa hàng DAS
+    meta(name='description', content='Bán hàng online')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='components/boostrap/bootstrap.min.css')
+    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
+    link(rel='stylesheet', href='css/app.css')
+    link(rel='stylesheet', href='css/login-signup.css')
+    link(rel='stylesheet', href='css/editUser.css')
+    link(href='animation/animate.css', rel='stylesheet')
+    link(href='animation/ng-animation.css' rel='stylesheet')
+    script(type='text/javascript', src='components/jquery/jquery.min.js')
+    script(type='text/javascript', src='components/boostrap-js/bootstrap.min.js')
+    script(type='text/javascript', src='components/angular/angular.min.js')
+    script(src='https://code.jquery.com/ui/1.11.4/jquery-ui.js')
+    script(type='text/javascript', src='//api.filestackapi.com/filestack.js')
+
+  body()
+    .header_bg()
+      #topwebsite
+        .content-topwebsite
+          .content-topwebsite(data-toggle='tooltip', data-placement='bottom', title='Tam')
+            img(src='images/clock.png')
+            h3 THỜI GIAN
+            p 08:30 sáng - 10:00 tối
+        .content-topwebsite(data-toggle='tooltip', data-placement='bottom', title='Get update on what  is sharing public')
+          img(src='images/car.png')
+          h3 GIAO HÀNG TOÀN QUỐC
+          p Miễn phí khi mua nhiều
+        .content-topwebsite
+          img(src='images/phone.png')
+          h3 ĐẶT HÀNG NHANH
+          p (08) 7307 1441
+        .content-topwebsite
+          h3 BẢO HÀNH 365 NGÀY
+          p Đổi trả trong 7 ngày
+      .wrap
+        .header
+          .logo
+            a(href='/')
+              img(height='45', width='110', src='images/logo.png', alt='')
+          if user != null
+            .h_icon(style='height:70px;border:1px solid white;')
+              ul.icon1.sub-icon1()
+                li
+                  if listcart == null
+                    i#number 0
+                  else
+                    i#number #{listcart.cart.length}
+                li
+                  a.active-icon.c1(href='/cart')
+                li
+                  i#cart Cart
+          // start login sang
+          #login()
+            if user == null
+              button.btn.btn-primary(type='button' id = 'loginbtn') Login
+            else
+              .dropdown
+                button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
+                  | Hello #{user.fullname},
+                  span.caret
+                ul.dropdown-menu
+                  if user.password != null
+                    li
+                      button.btn.btn-default(id='editbtn' style='background: #3b5998')
+                        | Edit account
+                        span.glyphicon.glyphicon-phone
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
+                  else 
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
+                  li
+                    input(type='filepicker', data-fp-apikey='AeNIdjegwSXSYhQ2xcmojz', onchange='Ham(event.fpfile.url, "#{user.email}")')
+          // form login
+          // -login form--
+          //TamNguyen
+          div.modal-bg
+          if user == null
+            #modal-login
+              .login-page
+                .form
+                  a#login-page.close(href='/') &#215
+
+                  form.login-form(action='/login', method='post')
+                    p.email
+                      input(name="email" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
+                    br
+                    p.password
+                      input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Password" id="password")
+                    button LOG IN
+
+                    p.message NOT REGISTERED? <a href="/" id="refSignUp"> CREATE AN ACCOUNT </a>
+                    </br>
+                    div.social-login
+                      a(href="/auth/facebook" class="btn btn-primary")<i class="fa fa-facebook fa-lg"></i> Log in with Facebook
+
+                      a(href="/auth/google" class="btn btn-danger")<i class="fa fa-google-plus fa-lg"></i> Log in with Google
+            #modal-signup
+              .login-page
+                .form
+                  a#signup-page.close(href='/') &#215
+                  form.register-form(action='/signup', method='post')
+                    p.fullname
+                      input(name="fullname" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Full name" id="fullname")
+                    br
+                    p.email
+                      input(name="email" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
+                    br
+                    p.password
+                      input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Password" id="password")
+
+                    button CONFIRM
+
+                    p.message ALREADY REGISTERED? <a href="/" id="refLogin"> SIGN IN </a>
+          else
+            #modal-editUser
+              div.login-page
+                div.form
+                  a#editUser.close(href='/') &#215
+                  form.edit-form(action='/editUser', method='post') 
+                    p.fullname
+                      input(name="fullname" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Full name" id="fullname" value="#{user.fullname}")
+                    br
+                    p.email
+                      input(name="email" type="email" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email" value="#{user.email}")
+                    br
+                    p.password
+                      input(name="newpassword" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="New password" id="newpassword" ) 
+                    br
+                    p.confirmpassword
+                      input(name="confirmpassword" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Confirm password" id="confirmpassword") 
+                    button Confirm 
+
+          .h_search
+            form
+              input(type='text', value='')
+              input(type='submit', value='')
+          .clear
+    .header_btm
+      .wrap
+        .header_sub
+          .h_menu
+            ul
+              li.active
+                a(href='/') Home
+              |  |
+              li
+                a(href='/store') Store
+              |  |
+              li
+                a(href='/services') Services
+              |  |
+              li
+                a(href='/contact') Contact us
+          .top-nav
+            nav.nav
+              a#w3-menu-trigger(href='#')
+              ul.nav-list(style='')
+                li.nav-item
+                  a(href='/') Home
+                li.nav-item
+                  a(href='/store') Store
+                li.nav-item
+                  a(href='/services') Services
+                li.nav-item
+                  a(href='/contact') Contact us
+            .search_box
+              form
+                input(type='text', value='Search', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Search';}")
+                input(type='submit', value='')
+            .clear
+          .clear
+
+    block content
+    // //r
+    // start slider
+    // start footer
+
+    .footer_bg1()
+      .wrap
+        .footer
+           a.cd-top(href='#0') Top
+            // end scroll_top_btn
+          .copy
+            p.link
+              | ©  All rights reserved | Designed by  
+              a(href='http://teamdas.esy.es/default.html')  DAS
+          .clear
+
+    script(src='components/angular/angular.min.js')
+    script(src='components/angular-route/angular-route.min.js')
+    script(src='components/firebase/firebase.js')
+    script(src='components/angularfire/angularfire.min.js')
+
+    script(src='components/login/script.js')
+    script(src='components/editUser/script.js')
+    script(src='js/script.js')
+    script(src='js/main.js')
+    script(src='components/responsive-menu/responsive.menu.js')
