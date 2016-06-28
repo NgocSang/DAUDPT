@@ -5,18 +5,25 @@ block content
 	div#da-slider.da-slider
 		div.da-slide
 
-			h2.product-name welcome to aditii
-			p.dots3 When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane.
-			a.da-link(href='details.html') shop now
+			h2.product-name #{data[0].basicInfo.name}
+			p.dots3 #{data[0].basicInfo.description}
+			a.da-link(href='#{data[0].productID}') shop now
 			.da-img
-				img(src='images/slider1.png', alt='image01')
+				img(src='#{data[0].basicInfo.imgUrl}', alt='Anh')
 		div.da-slide
-			h2 Easy management
+			h2.product-name #{data[1].basicInfo.name}
 
-			p Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
-			a.da-link(href='details.html') shop now
+			p.dots3 #{data[1].basicInfo.description}
+			a.da-link(href='#{data[1].productID}') shop now
 			.da-img
-				img(src='images/slider2.png', alt='image01')
+				img(src='#{data[1].basicInfo.imgUrl}', alt='image01')
+		div.da-slide
+			h2.product-name #{data[2].basicInfo.name}
+
+			p.dots3 #{data[1].basicInfo.description}
+			a.da-link(href='#{data[2].productID}') shop now
+			.da-img
+				img(src='#{data[2].basicInfo.imgUrl}', alt='image01')
 		nav.da-arrows
 			span.da-arrows-prev
 			span.da-arrows-next
@@ -28,12 +35,12 @@ block content
 		.wrap
 			.main
 				.grids_of_3
-				p #{data[0].productID}
 					for product in data
 						.grid1_of_3(class="animated zoomIn")
 							a(href='#{product.productID}')
 								img.product-image(src='#{product.basicInfo.imgUrl}', alt='product')
-								h3.dots3 #{product.basicInfo.name}
+								div(style="margin: 6% 0 8%; height:110px;")
+									h3.dots3 #{product.basicInfo.name}
 								.price
 									h4 #{product.basicInfo.price}
 										span indulge

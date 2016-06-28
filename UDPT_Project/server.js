@@ -5,9 +5,10 @@
 var path = require('path');
 var fs = require('fs');
 var express = require('express');
+var mongodb = require('mongodb');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var config = require('config');
+var config = require('./config/config');
 var http = require('http');
 var app = express();
 var port = process.env.PORT || 3000;
@@ -18,12 +19,10 @@ var server = http.createServer(app);
 
 
 
-//socket.io
-var io = require('socket.io').listen(server);
 
 
 
-app.set('io', io);
+
 
 
 
@@ -52,8 +51,7 @@ require('./config/express')(app, passport);
 
 // Bootstrap routes
 require('./config/routes')(app, passport);
-//socket,io
-require('./config/socketio')(app,io);
+
 
 server.listen(port);
 console.log('Express app started on port ' + port);

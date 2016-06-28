@@ -2,37 +2,47 @@ extends ../layouts/default.jade
 block content
   link(rel='stylesheet', href='css/store.css')
   #order-bar
-    form#formSearch
+    form(action="/store" method="Post")#formSearch
       .search(class="search animated bounceInLeft")
         label.label Name:
-        input.filter(ng-model='filterObject.name', type='text')
+        input.filter(name='nameproduct', type='text')
       .search(class="search animated zoomIn")
-        label.label Color:
-        input.filter(type='text')
+        select.form-control.filter(name='color')
+          option(selected='', value='') All
+          option(value='Red') Red
+          option(value='Green') Green
+          option(value='White') White
+          option(value='Black') Black
+          option(value='Yellow') Yellow
       .search(class="search animated zoomIn")
         label.label Size:
         select.form-control.filter(name='size')
           option(selected='', value='') All
-          option(value='1') 1
+          option(value='M') M
+          option(value='L') L
+          option(value='S') S
+          option(value='XL') XL
       .search( class="search animated bounceInRight")
         label.label Price:
-        select.form-control.filter(name='size')
+        select.form-control.filter(name='price')
           option(selected='', value='') All
-          option(value='1') Less than 200.000
-          option(value='2') From 200.000 to 500.000
-          option(value='3') From 500.000 to 1.000.00
-          option(value='4') Greater than 1.000.000
-  for product in listproduct
-    .main_bg
-      .wrap
-        .main
-          .grids_of_3
+          option(value='0-200000') Less than 200.000
+          option(value='200000-500000') From 200.000 to 500.000
+          option(value='5000000-1000000') From 500.000 to 1.000.00
+          option(value='1000000-10000000') Greater than 1.000.000
+      button(type="submit") timkiem
+  .main_bg
+    .wrap
+      .main
+        .grids_of_3
+          for product in data
             .grid1_of_3(class="animated zoomIn")
               a(href='#{product.productID}')
-                img(src='#{product.basicInfo.imgUrl}', alt='')
-                h3.dots3 #{product.basicInfo.name}
+                img.product-image(src='#{product.basicInfo.imgUrl}', alt='product')
+                div(style="margin: 6% 0 8%; height:110px;")
+                  h3.dots3 #{product.basicInfo.name}
                 .price
                   h4 #{product.basicInfo.price}
                     span indulge
                 span.b_btm
-            .clear
+          .clear
