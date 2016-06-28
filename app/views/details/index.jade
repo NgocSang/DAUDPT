@@ -3,7 +3,7 @@ block content
   link(rel='stylesheet', type='text/css', href='components/details-css/productviewgallery.css', media='all')
   link(rel='stylesheet', type='text/css', href='css/details.css', media='all')
 
-  .main_bg
+  .main_bg(ng-app='AppDetail' ng-controller="controler")
     .wrap
       .main
         // start content
@@ -33,21 +33,21 @@ block content
                   ul
                     li
                       | Color:
-                      select#selectcolor(ng-model='cart.color', required='')
+                      select#selectcolor(required='')
                         for color in data[0].color
                           option( selected='', value='#{color}') #{color}
                     li
                       | Size:
-                      select#selectsize(ng-model='cart.size', required='')
+                      select#selectsize( required='')
                         for size in data[0].size
                           option(selected='', value='#{size}') #{size}
 
                     li
                       | Quantity:
-                      input#selectnumber(style='height: 28px;', placeholder='Enter quantity', type='number', min='1', ng-model='cart.number', required='')
+                      input#selectnumber(style='height: 28px;', placeholder='Enter quantity', type='number', min='1',  required='')
                   .btn_form(style='width:100%;')
                     if user != null
-                      button.btn.btn-primary(onclick="Addcart('#{data[0].productID}', '#{user.email}','#{data[0].basicInfo.name}','#{data[0].basicInfo.price}', '#{data[0].basicInfo.imgUrl}')", style='width:100%;') add to cart
+                      button.btn.btn-primary(onclick="Addcart('#{data[0].productID}', '#{user.email}','#{data[0].basicInfo.name}','#{data[0].basicInfo.price}', '#{data[0].basicInfo.imgUrl}')", style='width:100%;') Add to cart
                     else
                       button.btn.btn-primary(onclick="window.alert('please login')", style='width:100%;') add to cart
                   .clear
@@ -61,12 +61,11 @@ block content
                 p.para.top #{data[0].basicInfo.description}
               .box
                 .comments-container
-                  h1(ng-hide='product.reviews.length', style='text-align: center;') Nothing here yet. Be the first to reivew.
                   ul#comments-list.comments-list
                     #review
                       if reviewpro[0] != null
                         for review in reviewpro[0].comment
-                          li(ng-repeat='review in product.reviews')
+                          li()
                             .comment-main-level
                               .comment-avatar
                                 img(src='#{review.avatar}', alt='Avatar')
@@ -78,10 +77,11 @@ block content
                                 .comment-content
                                   p
                                     | Rating:
-                                    span(style='color:#e4bb24;') #{review.rating}
+                                    span(style='color:#e4bb24;')
+                                      star-rating(style='color:#e4bb24;' stars='#{review.rating}')
                                   p #{review.content}
                     if user != null
-                      li(ng-show='review.$value === null')
+                      li()
                         .comment-main-level
                           .comment-avatar
                             img(src='#{user.avatar}', alt='Avatar')
@@ -94,26 +94,22 @@ block content
                                 p
                                   | Rating:
                                   span(style='margin-left:') 1
-                                    input(type='radio', name='rating', value='1', required='')
+                                    input(type='radio', name='rating', value='1', required)
                                   span() 2
-                                    input(type='radio', name='rating', value='2', required='')
+                                    input(type='radio', name='rating', value='2', required)
                                   span() 3
-                                    input(type='radio', name='rating', value='3', required='')
+                                    input(type='radio', name='rating', value='3', required checked)
                                   span() 4
-                                    input(type='radio', name='rating', value='4', required='')
+                                    input(type='radio', name='rating', value='4', required)
                                   span() 5
-                                    input(type='radio', name='rating', value='5', required='')
+                                    input(type='radio', name='rating', value='5', required)
 
-                                textarea#message.form-control(rows='5', required='')
+                                textarea#message.form-control(rows='5', required)
                                 button.btn.btn-primary(onclick="Addcomment('#{data[0].productID}','#{user.avatar}','#{user.username}')" style='float:right;') Send
               // end tabs
           .clear
           //
-          button(onclick="something(#{data[0].basicInfo.description})") ádasđ
-          script.
-            var something = function(data) {
-            console.log('a')
-            }
+
 
   script(type='text/javascript', src='components/jquery/jquery.min.js')
   script(type='text/javascript', src='components/detail-js/jquery.elevatezoom.js')

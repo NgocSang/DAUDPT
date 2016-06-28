@@ -13,7 +13,7 @@
     width: 100%;
     height: auto;
     margin-top:20px;
-
+    padding-left: 80px;
 }
 #formSearch{
     width: 95%;
@@ -63,11 +63,11 @@ height: auto;
         float: left;
         margin-right: 20px;
     }
+
 }
 @media only screen and (max-width: 850px){
 
     .search{
-
         clear: left;
         width: 100%;
         height: auto;
@@ -79,5 +79,8 @@ height: auto;
         float: left;
         margin-right: 20px;
     }
-
+    #btnsearch{
+      width: 100% !important;
+      margin-top: 10px;
+    }
 }

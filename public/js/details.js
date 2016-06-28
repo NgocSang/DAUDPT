@@ -1,3 +1,19 @@
+var app = angular.module('AppDetail', []);
+app.controller('controler', function($scope) {});
+app.directive('starRating', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            stars: '=stars'
+        },
+        template: "<span ng-repeat='i in getTimes(stars) track by $index' class='glyphicon glyphicon-star'></span>",
+        link: function ($scope) {
+            $scope.getTimes = function (n) {
+                return new Array(n);
+            };
+        }
+    };
+});
 
 (function($) {
     $(function() {
@@ -38,6 +54,13 @@ zoomWindowFadeOut: 750
 }*/
 function Addcomment(id, avtar, name){
   var content = $('#message').val();
+  if(content =="")
+  {
+    window.alert('Please write comment!');
+    return;
+  }
+  content = content.replace(/[><'--]/g,'');
+  console.log('Gia tri con tent' + content);
   var rating= $('input[name=rating]:checked').val();
   var review ={
     productID:id,

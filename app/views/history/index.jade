@@ -1,0 +1,26 @@
+extends ../layouts/default.jade
+block content
+  link(rel='stylesheet', href='css/history.css')
+  .history-bg
+    h1.title History cart
+    if(listorders)
+      p #{listorders.lenght}
+      for order in listorders
+        .history()
+          table.table.table-hover.details
+            thead
+              tr
+                th Name
+                th Picture
+                th Color
+                th Number
+                th Price
+            tbody
+              for item in order.item
+                tr()
+                  td #{item.name}
+                  td
+                    img(src='#{item.imgUrl}', height='70', width='70')
+                  td #{item.color}
+                  td #{item.number}
+                  td #{item.price}đ

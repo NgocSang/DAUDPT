@@ -6,14 +6,14 @@
 
 var passport = require('passport');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://sang:123456789@ds013574.mlab.com:13574/doanudpt');
-var db = mongoose.connection;
-var User = mongoose.model('User');
-var product = mongoose.model('products');
-var cart = mongoose.model('carts');
-var review = mongoose.model('reviews');
-var order = mongoose.model('oders');
-var ObjectID = require('mongodb').ObjectID;
+var listpro = require('../app/controllers/product');
+var cartpro = require('../app/controllers/cart');
+var listord = require('../app/controllers/order');
+var reviewpro = require('../app/controllers/review');
+var User = require('../app/controllers/user');
+//mongoose.connect('mongodb://sang:123456789@ds013574.mlab.com:13574/doanudpt');
+
+
 module.exports = function (app, passport) {
 
   //==========================================================
@@ -44,7 +44,6 @@ module.exports = function (app, passport) {
   app.post('/logout', function(req, res){
     req.logOut();
     res.redirect('/');
-    console.log( "logout");
   });
   //==========================================================
   //==============LOGIN WITH FACEBOOK=========================
@@ -69,67 +68,66 @@ module.exports = function (app, passport) {
   //=============================================================
 
   app.get('/',function(req, res, next){
-    var listproduct = db.model('products');
-
-    console.log("Success");
-    listproduct.find({'featured':'true'}).exec(function(err, data){
-      if(err){
-  		    res.send("Errors");
-    	}
-      else
-    	{
-    		//res.json(data);
-        console.log(data);
-    		console.log("Success");
-        if(req.user){
-          var cartproduct = db.model('carts');
-          cartproduct.findOne({email:req.user.email}).exec(function(err, listcart){
-            if(err){
-              res.send('Error');
-            }
-            else{
-              res.render('home', {data: data, user: req.user, listcart:listcart});
-            }
-          });
-        }
-        else{
-          res.render('home', {data: data, user: req.user, listcart:null});
-        }
-    	}
-    })
+    //-----Test MVC----------
+    listpro.loadtrueproduct(function(err, data){
+      console.log(data);
+      if(req.user){
+        cartpro.loadproductcart(req.user.email,function(error,listcart){
+          if(error){
+            res.send('Error');
+          }
+          else{
+            res.render('home', {data: data, user: req.user, listcart:listcart});
+          }
+        });
+      }
+      else{
+        res.render('home', {data: data, user: req.user, listcart:null});
+      }
+    });
   });
 app.post('/',function(req, res, next){
-  console.log(req.body.email);
-  console.log(req.body.avatar);
-  var changuser = db.model('User');
-  changuser.update({email:req.body.email},{avatar:req.body.avatar}).exec(function(err, data){
-    if(err){
-      res.send('Error');
-    }else{
-      res.send({success:true});
+  User.Changeavatar(req.body.email,req.body.avatar, function(err, data){
+      if(err){
+        res.send('Error');
+      }else{
+        res.send({success:true});
 
-    }
+      }
   });
-
 });
-app.get('/cart',function(req, res, next){
-  var cartproduct = db.model('carts');
-  cartproduct.findOne({email:req.user.email}).exec(function(err, listcart){
-    if(err){
-      res.send('Error');
-    }
-    else{
-      console.log('Kiểm tra json');
-      console.log(listcart);
-      res.render('cart', {user: req.user, listcart:listcart});
-      ///////////////////////////////////
 
-    }
+app.get('/history',function(req, res, next){
+    listord.ListOrder(req.user.email, function(err, list){
+      if(err){
+        console.log("VO loi");
+        res.send("Error");
+      }
+      else{
+        res.render('history', {listorders: list, user:req.user});
+      }
+    });
   });
+///
+app.get('/cart',function(req, res, next){
+  console.log(req.user.email);
+  if(req.user.email != undefined){
+    cartpro.loadproductcart(req.user.email,function(error,listcart){
+      if(error){
+        res.send('Error');
+      }
+      else{
+        res.render('cart', {user: req.user, listcart:listcart});
+      }
+    });
+  }
+  else{
+    res.redirect('/');
+  }
+
 });
   app.post('/cart', function(req, res, next){
     if(req.body.idorder){
-      var cartremove = db.model('carts');
       var oderproduct = new order({id:req.body.idorder, item:req.body.item, receiver:req.body.receiver});
       oderproduct.save(function(err, data){
         if(err){
@@ -137,12 +135,11 @@ app.get('/cart',function(req, res, next){
         }
         else{
 
-          cartremove.remove({email:req.body.idorder}).exec(function(err, data){
-            if(err){
+          cartpro.Removeproductcart(req.body.idorder,function(error,data){
+            if(error){
               res.send('Erorr');
             }
             else{
-              console.log('Add order success');
               res.send({success:true});
             }
           });
@@ -150,25 +147,69 @@ app.get('/cart',function(req, res, next){
         }
       });
     }else{
-        var cartremoved = db.model('carts');
-        console.log(req.body.id);
-          console.log(req.body.email);
-        cartremoved.update({email:req.body.email},{$pop:{cart:{_id:ObjectID(req.body.id)}}}).exec(function(err, data){
-          if(err){
-            res.send('Error');
-          }
-          else{
-            console.log('Xóa thành công');
-            res.send({success:true});
-          }
+      cartpro.Updateproductcart(req.body.email, req.body.id, function(error,data){
+        if(error){
+          res.send('Error');
+        }
+        else{
+          res.send({success:true});
+        }
       });
     }
   });
-  /*
-
-  */
   app.get('/store',function(req, res, next){
-    res.render('store',{user:req.user});
+    listpro.loadproduct(function(err, data){
+      if(err){
+        res.send('Error');
+      }
+      else{
+        res.render('store', {user: req.user,data:data});
+      }
+    });
+  });
+  app.post('/store',function(req, res, next){
+    var query = {
+      basicInfo:{
+        name:{$regex:req.body.nameproduct}
+      },
+      color:req.body.color,
+      size:req.body.size
+    };
+    if (req.body.nameproduct == ''){
+        delete query.basicInfo;
+    }
+    if(req.body.color == ''){
+      delete query.color;
+    }
+    if(req.body.size == ''){
+      delete query.size;
+    }
+    var ketqua = {};
+     for(var prop1 in query){
+       if(typeof prop1 ==="string"){
+
+       if(typeof query[prop1] === "string")
+        ketqua[prop1] = query[prop1];
+       else{
+
+         for(var prop2 in query[prop1]){
+
+           if(typeof prop2 ==="string"){
+             console.log(typeof query[prop1][prop2]);
+           if(typeof query[prop1][prop2] === "object")
+            ketqua[prop1+"."+prop2] = query[prop1][prop2];
+          }
+         }
+       }
+     }
+     }
+    listpro.Searchproduct(ketqua, function(err, data){
+      if(err){
+        res.send('Error');
+      }else{
+        res.render('store', {user: req.user,data:data});
+      }
+    });
   });
   app.get('/contact',function(req, res, next){
     res.render('contact', {user:req.user});
@@ -178,49 +219,38 @@ app.get('/cart',function(req, res, next){
   });
   app.get('/:id',function(req, res, next){
     var productID = req.params.id;
-    var detailsproduct = db.model('products');
-    var reviewproduct = db.model('reviews');
-    detailsproduct.find({'productID':productID}).exec(function(err, data){
+    listpro.findproduct(productID, function(err, data){
       if(err){
   		    res.send("Errors");
     	}
       else
     	{
-        console.log("vo detail product");
-        console.log(data[0]);
-        reviewproduct.find({'productID':productID}).exec(function(err, reviewpro){
+        reviewpro.Listreview(productID, function(err, reviewpro){
           if(err){
             res.send('Errors');
           }
           else{
 
-            ////////////////////
-            console.log(data);
-        		console.log("Success");
             if(req.user){
-              var cartproduct = db.model('carts');
-              cartproduct.findOne({email:req.user.email}).exec(function(err, listcart){
-                if(err){
-                  res.send('Error');
-                }
-                else{
-                  res.render('details', {data: data, reviewpro: reviewpro, user: req.user, listcart:listcart});
-                }
-              });
-            }
+            cartpro.loadproductcart(req.user.email,function(error,listcart){
+              if(error){
+                res.send('Error');
+              }
+              else{
+                res.render('details', {data: data, reviewpro: reviewpro, user: req.user, listcart:listcart});
+              }
+            });
+          }
             else{
               res.render('details', {data: data, reviewpro: reviewpro, user: req.user, listcart:null});
             }
           }
         });
-
-    	}
-
+    }
     });
   });
   app.post('/:id', function(req, res){
     if(req.body.productID){
-      var reviewproduct = db.model('reviews');
       var productID = req.body.productID;
       console.log('id san pham' + productID);
       var reviewed = {
@@ -229,36 +259,29 @@ app.get('/cart',function(req, res, next){
           name:req.body.comment.name,
           rating:req.body.comment.rating
         };
-      reviewproduct.findOne({'productID':productID}).exec(function(err, reviewpro){
+      reviewpro.Findreview(productID,function(err, reviewpro1){
         if(err){
           res.send('Errors');
         }
         else{
-          if (reviewpro)
+          if (reviewpro1)
           {
-            console.log('vo ham upadte comment');
-            console.log(reviewed);
-            reviewproduct.update({productID:productID},{$push:{comment:reviewed}}).exec(function(err, data){
-              if(err){
+            reviewpro.UdateAddreview(productID,reviewed, function(err1, data){
+              if(err1){
                 res.send('Erorr');
               }
               else{
-                console.log('Thanh cong');
+
                 res.send({success:true, data:reviewed});
               }
             });
           }
           else{
-
-            var reviweproduct = new review({productID:productID, comment:reviewed });
-            reviweproduct.save(function(err, data){
+            reviewpro.Newreview(productID, reviewed, function(err2,data){
               if(err){
                 res.send('Error');
-
               }
               else {
-
-                console.log('Them thanh cong');
                 res.send({success:true, data:reviewed});
               }
             });
@@ -266,10 +289,9 @@ app.get('/cart',function(req, res, next){
         }
       });
   }else{
-      console.log("vo post");
-      console.log(req.body.email);
+
       var email = req.body.email;
-      var cartproduct = db.model('carts');
+      //var cartproduct = db.model('carts');
       var carted = {
         color : req.body.cart.color,
         imgUrl : req.body.cart.imgUrl,
@@ -278,7 +300,37 @@ app.get('/cart',function(req, res, next){
         price : req.body.cart.price,
         size : req.body.cart.size
         };
-      cartproduct.findOne({'email':email}).exec(function(err, cartpro){
+      cartpro.loadproductcart(email, function(error, cartproc){
+        if(error){
+          res.send('Error');
+        }
+        else{
+          if(cartproc){
+            cartpro.UpdateAddproductcart(email,carted,function(error1,data){
+              if(error1){
+                res.send('Erorr');
+              }
+              else{
+
+                res.send({success:true});
+              }
+            });
+          }
+          else{
+            cartpro.Newproductcart(email, carted, function(error2, data){
+              if(error2){
+                res.send('Error');
+
+              }
+              else {
+                res.send({success:true});
+              }
+            });
+            //viet nguoc lai ko trả
+          }
+        }
+      });
+      /*cartproduct.findOne({'email':email}).exec(function(err, cartpro){
         if(err){
           res.send('Error');
         }
@@ -310,8 +362,7 @@ app.get('/cart',function(req, res, next){
             });
           }
         }
-      });
-      console.log(carted);
+      });*/
   }
   });
 
