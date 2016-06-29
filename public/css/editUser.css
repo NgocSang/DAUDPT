@@ -1,0 +1,12 @@
+#modal-editUser{
+  position:absolute;
+  background-color:#F5F5F6;
+  top:40%;
+  left:45%;
+  z-index:101;
+  width:340px;
+  height:260px;
+  margin-top:-130px;
+  margin-left:-170px;
+  display: none;
+}

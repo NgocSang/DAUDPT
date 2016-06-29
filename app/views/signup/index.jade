@@ -1,0 +1,20 @@
+extends ../layouts/default.jade
+
+block main
+
+block content
+	div.login-page
+		div.form
+			form.register-form(action='/signup', method='post')
+				p.fullname
+					input(name="username" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="User name" id="username")
+
+				p.email
+					input(name="email" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
+
+				p.password
+					input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Password" id="password")
+
+				button Create
+
+				p.message Already registered? <a href="/"> Sign In </a>

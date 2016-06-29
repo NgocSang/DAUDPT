@@ -1,0 +1,122 @@
+.login-page {
+	position: relative;
+	width: 500px;
+	height: 340px;
+  padding: 20px;
+
+	background-color: #d9d9d9;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+.form {
+  position: relative;
+  z-index: 1;
+  background: #d9d9d9;
+  text-align: center;
+}
+
+.form input {
+    font-family: sans-serif;
+    outline: 0;
+    background: #f2f2f2;
+    width: 430px;
+    border: 5px;
+    margin: 0 15px 0 15px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border-radius: 7px;
+}
+
+.form button{
+    font-family: sans-serif;
+    outline: 0;
+    background: #3399ff;
+    width: 430px;
+    border: 5px;
+    padding: 15px;
+    margin: 10px 15px 0 15px;
+    color: #FFFFFF;
+    font-size: 18px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 7px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+}
+
+.form button:hover,.form button:active,.form button:focus {
+    background: #0066cc;
+}
+
+
+.form .message {
+  margin: 10px 16px;
+  color: #b3b3b3;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form .message a{
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+.modal-bg{
+  position:fixed;
+  left:0;right:0;
+  top:0;bottom:0;
+  z-index:100;
+  background-color:rgba(50,50,50,0.5);
+  display: none;
+}
+
+#modal-login{
+  position:absolute;
+  background-color:#F5F5F6;
+  top:40%;
+  left:45%;
+  z-index:101;
+  width:340px;
+  height:260px;
+  margin-top:-130px;
+  margin-left:-170px;
+  display: none;
+}
+
+#modal-signup{
+  position:absolute;
+  background-color:#F5F5F6;
+  top:40%;
+  left:45%;
+  z-index:101;
+  border-radius:3px;
+  width:340px;
+  height:260px;
+  margin-top:-130px;
+  margin-left:-170px;
+  display: none;
+}
+
+
+.social-login a{
+  position:relative;
+  float: left;
+  border: 1px solid rgba(0,0,0,0.05);
+  padding: 8px;
+  border-radius: 2px;
+  font-size: 13px;
+  margin: 0 38px 0 38px;
+  text-align:center;
+}
+.social-login a i{
+  position: relative;
+  float: left;
+  width: 20px;
+  top: 2px;
+}
+.social-login a:first-child{
+  background-color: #49639F;
+}
+.social-login a:last-child{
+  background-color: #DF4A32;
+}

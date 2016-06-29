@@ -1,0 +1,54 @@
+extends ../layouts/default.jade
+block content
+  link(rel='stylesheet', href='css/store.css')
+  .row
+      .col-sm-23
+        .row.breadcrumb-wrapper
+          .col-sm-18
+            ol.breadcrumb
+              li
+                a(href='#')
+                  i.glyphicon.glyphicon-home
+                  |  DAS
+              li.active
+                | Store
+  #order-bar
+    form(action="/store" method="Post")#formSearch
+      .search(class="search animated bounceInLeft")
+        label.label Name:
+        input.filter(name='nameproduct', type='text')
+      .search(class="search animated zoomIn")
+        label.label Color:
+        select.form-control.filter(name='color')
+          option(selected='', value='') All
+          option(value='Red') Red
+          option(value='Green') Green
+          option(value='White') White
+          option(value='Black') Black
+          option(value='Yellow') Yellow
+      .search(class="search animated zoomIn")
+        label.label Size:
+        select.form-control.filter(name='size')
+          option(selected='', value='') All
+          option(value='M') M
+          option(value='L') L
+          option(value='S') S
+          option(value='XL') XL
+      .search(class="search animated zoomIn")
+        button#btnsearch.btn.btn-primary(type='submit' ,style="width:200px;") Search
+          span.glyphicon.glyphicon-search
+  .main_bg
+    .wrap
+      .main
+        .grids_of_3
+          for product in data
+            .grid1_of_3(class="animated zoomIn")
+              a(href='#{product.productID}')
+                img.product-image(src='#{product.basicInfo.imgUrl}', alt='product')
+                div(style="margin: 6% 0 8%; height:110px;")
+                  h3.dots3 #{product.basicInfo.name}
+                .price
+                  h4 #{product.basicInfo.price}
+                    span indulge
+                span.b_btm
+          .clear
