@@ -17,10 +17,10 @@
 ## Giới thiệu
 DAS Store là một website bán hàng nợi mọi tín đồ thời trang thỏa sức mua sắm với các sản phẩm mới nhất của các thương hiệu nổi tiếng trên toàn thế giới. Hãy cùng tham gia với chúng tôi, cùng trải nghiệm và thay đổi thời trang bản thân.
 
-Website: [DAS Store](http://calm-shore-60970.herokuapp.com/)
+Website: [DAS Store](https://calm-shore-60790.herokuapp.com)
 ## Wireframe
 ### Link
-![Image of Link](https://s6.postimg.org/oe51csy2l/link.png)
+![Image of Link](./images/link.png)
 ### Login
 ![Image of Login](https://s6.postimg.org/kvt1gex6l/login.png)
 ### Home
