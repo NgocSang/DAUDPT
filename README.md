@@ -1,9 +1,11 @@
 # DAS Store - Đồ án ứng dụng phân tán
+
 ## Nhóm
 - 1312474 - Triệu Xuân Quý
 - 1312485 - Nguyễn Ngọc Sáng
 - 1312498 - Trần Thị Sương
 - 1312508 - Nguyễn Đăng Thiện Tâm
+
 ## Mục lục
 - [Giới thiệu](#Giới-thiệu)
 - [Wireframe](#Wireframe)
@@ -11,6 +13,7 @@
 - [Data schema](#Data-schema)
 - [Đánh giá cá nhân](#Đánh-giá-cá-nhân)
 - [Video Walkthrough](#Video-Walkthrough)
+
 ## Giới thiệu
 DAS Store là một website bán hàng nợi mọi tín đồ thời trang thỏa sức mua sắm với các sản phẩm mới nhất của các thương hiệu nổi tiếng trên toàn thế giới. Hãy cùng tham gia với chúng tôi, cùng trải nghiệm và thay đổi thời trang bản thân.
 
