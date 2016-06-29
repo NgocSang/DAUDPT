@@ -1,4 +1,11 @@
 
+.row{
+    font-family: 'Source Sans Pro', sans-serif;
+    width: 98%;
+    margin: auto;
+
+    margin-top: 10px;
+}
 .breadcrumb{
     margin-bottom: 0!important;
     background: #e4e4e4;
@@ -8,27 +15,32 @@
 .breadcrumb a{
     color: #9d9d9d;
 }
-
+.active{
+    font-weight: bold;
+    color: #337ab7 !important;
+}
 #order-bar{
-    width: 100%;
     height: auto;
     margin-top:20px;
-    padding-left: 80px;
+    margin-bottom:20px;
 }
 #formSearch{
-    width: 95%;
     height: auto;
     overflow:hidden;
     margin: auto;
+    text-align: center;
 }
+
+#formSearch * {
+    display: inline-block;
+}
+
 #formSearch .filter{
     width: 65%;
     height: 30px;
-    float: left;
     margin-right: 20px;
 }
 #formSearch .label{
-    float:left;
     font-weight:bold;
     color: black;
     font-size: 17px;
@@ -38,8 +50,9 @@
     width: 23%;
     height: auto;
     overflow:hidden;
-    float: left;
+    animation: 6s;
 }
+
 /*
 #formSearch .filter{
 display: block;
@@ -63,11 +76,11 @@ height: auto;
         float: left;
         margin-right: 20px;
     }
-
 }
 @media only screen and (max-width: 850px){
 
     .search{
+
         clear: left;
         width: 100%;
         height: auto;
@@ -79,8 +92,10 @@ height: auto;
         float: left;
         margin-right: 20px;
     }
-    #btnsearch{
-      width: 100% !important;
-      margin-top: 10px;
-    }
+
+}
+
+.loading-bar
+{
+    animation: infinite pulse;
 }

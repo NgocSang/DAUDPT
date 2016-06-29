@@ -15,7 +15,7 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
   userid: {type: String},
   token: {type: String},
-  username: {type: String, required: true},
+  fullname: {type: String, required: true},
   email: {type: String, required: true},
   password: {type: String, default: null},
   avatar:{type: String},

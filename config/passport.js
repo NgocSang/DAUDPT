@@ -32,14 +32,14 @@ module.exports = function (passport, config) {
 //====================LOGIN=================================
 //==========================================================
 passport.use('login', new LocalStrategy({
-usernameField : 'username',
+usernameField : 'email',
 passwordField : 'password',
 passReqToCallback : true
 },
 
 function(req, username, password, done) {
   process.nextTick(function() {
-    User.findOne({ 'username' : username }, function(err, user) {
+    User.findOne({ 'email' : username }, function(err, user) {
       if (err)
         return done(err);
 
@@ -56,7 +56,7 @@ function(req, username, password, done) {
 //====================SIGN UP=================================
 //==========================================================
 passport.use('signup', new LocalStrategy({
-  usernameField : 'username',
+  usernameField : 'email',
   passwordField : 'password',
   passReqToCallback : true
 },
@@ -65,7 +65,7 @@ function(req, username, password, done) {
   process.nextTick(function() {
 
   // kiểm tra xem username đã được sử dụng hay chưa
-    User.findOne({'username': username}, function(err, existingUser) {
+    User.findOne({'email': username}, function(err, existingUser) {
       if (err)
         return done(err);
 
@@ -76,9 +76,10 @@ function(req, username, password, done) {
     // Ngược lại thì tạo mới user
       else {
         var newUser = new User();
-        newUser.username = req.body.username;
+        newUser.fullname = req.body.fullname;
         newUser.email = req.body.email;
         newUser.password = newUser.generateHash(password);
+        newUser.avatar = 'http://studymovie.net/Cms_Data/Sites/admin/Themes/Default/images/default-avatar.jpg';
 
         newUser.save(function(err) {
           if (err)
@@ -114,7 +115,7 @@ function(req, token, refreshToken, profile, done) {
         }
         else {
           var newUserFB = new User();
-          newUserFB.username = profile.displayName;
+          newUserFB.fullname = profile.displayName;
           newUserFB.email = profile.emails[0].value;
           newUserFB.avatar = profile.photos[0].value;
 
@@ -147,7 +148,7 @@ function(req, token, refreshToken, profile, done) {
           var newUSerGG = new User();
           newUSerGG.userid = profile.id;
           newUSerGG.token = token;
-          newUSerGG.username = profile.displayName;
+          newUSerGG.fullname = profile.displayName;
           newUSerGG.email = profile.emails[0].value;
 
           newUSerGG.save(function(err) {

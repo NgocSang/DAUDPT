@@ -12,6 +12,7 @@ html.no-js(lang='en')
     link(rel='stylesheet', href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css')
     link(rel='stylesheet', href='css/app.css')
     link(rel='stylesheet', href='css/login-signup.css')
+    link(rel='stylesheet', href='css/editUser.css')
     link(href='animation/animate.css', rel='stylesheet')
     link(href='animation/ng-animation.css' rel='stylesheet')
     script(type='text/javascript', src='components/jquery/jquery.min.js')
@@ -63,18 +64,25 @@ html.no-js(lang='en')
             else
               .dropdown
                 button.btn.btn-primary.dropdown-toggle(type='button', data-toggle='dropdown')
-                  | Hello #{user.username},
+                  | Hello #{user.fullname}
                   span.caret
                 ul.dropdown-menu
-                  li
-                    button.btn.btn-default( style='background: #3b5998')
-                      | Edit account
-                      span.glyphicon.glyphicon-phone
-                  li
-                    form.logout(action="/logout", method="post")
-                      button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
-                        | Logout
+                  if user.password != null
+                    li
+                      button.btn.btn-default(id = 'editbtn' style='background: #3b5998')
+                        | Edit account
                         span.glyphicon.glyphicon-phone
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
+                  else
+                    li
+                      form.logout(action="/logout", method="post")
+                        button.btn.btn-default(id = 'logoutbtn', style='background: #3b5998')
+                          | Logout
+                          span.glyphicon.glyphicon-phone
                   li
                     a(href="/history" style='background: #3b5998; width:90%;margin-top:7px;height:30px;').btn.btn-default History order
                   li
@@ -91,7 +99,7 @@ html.no-js(lang='en')
 
                   form.login-form(action='/login', method='post')
                     p.email
-                      input(name="username" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="User name" id="username")
+                      input(name="email" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
                     br
                     p.password
                       input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Password" id="password")
@@ -109,10 +117,10 @@ html.no-js(lang='en')
                   a#signup-page.close(href='/') &#215
                   form.register-form(action='/signup', method='post')
                     p.fullname
-                      input(name="username" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="User name" id="username")
+                      input(name="fullname" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Full name" id="fullname")
                     br
                     p.email
-                      input(name="email" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
+                      input(name="email" type="email" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email")
                     br
                     p.password
                       input(name="password" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Password" id="password")
@@ -120,6 +128,24 @@ html.no-js(lang='en')
                     button CONFIRM
 
                     p.message ALREADY REGISTERED? <a href="/" id="refLogin"> SIGN IN </a>
+          else
+            #modal-editUser
+              .login-page
+                  .form
+                      a#editUser.close(href='/') &#215
+                      form.edit-form(action='/editUser', method='post')
+                        p.fullname
+                          input(name="fullname" type="text" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Full name" id="fullname" value="#{user.fullname}")
+                        br
+                        p.email
+                          input(name="email" type="email" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Email" id="email" value="#{user.email}")
+                        br
+                        p.password
+                          input(name="newpassword" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="New password" id="newpassword" )
+                        br
+                        p.confirmpassword
+                          input(name="confirmpassword" type="password" class="validate[required, custom[onlyLetter], length[0, 100]] feedback-input" placeholder="Confirm password" id="confirmpassword")
+                        button Confirm
 
           .h_search
             form
@@ -169,8 +195,7 @@ html.no-js(lang='en')
     .footer_bg1()
       .wrap
         .footer
-          button#toTop( style='display: block;')
-            span#toTopHover(style='opacity: 1;')
+          a.cd-top(href='#0') Top
           // end scroll_top_btn
           .copy
             p.link
@@ -184,5 +209,7 @@ html.no-js(lang='en')
     script(src='components/angularfire/angularfire.min.js')
 
     script(src='components/login/script.js')
+    script(src='components/editUser/script.js')
     script(src='js/script.js')
+    script(src='js/main.js')
     script(src='components/responsive-menu/responsive.menu.js')

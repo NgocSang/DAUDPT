@@ -66,6 +66,26 @@ module.exports = function (app, passport) {
   }));
   //=============================================================
   //=============================================================
+  app.post('/editUser', function(req, res){
+    if (req.user == null){
+      res.redirect('/');
+    } else{
+      User.editUser(req.user,
+      {
+        id    : req.user._id,
+        fullname  : req.body.fullname,
+        newpassword  : req.user.generateHash(req.body.newpassword),
+        email: req.body.email,
+      }, function(e, o){
+        if (e){
+          console.log(e);
+        } else{
+          req.user = o;
+          res.redirect('/');
+        }
+      });
+    }
+  });
 
   app.get('/',function(req, res, next){
     //-----Test MVC----------
@@ -128,8 +148,9 @@ app.get('/cart',function(req, res, next){
 });
   app.post('/cart', function(req, res, next){
     if(req.body.idorder){
-      var oderproduct = new order({id:req.body.idorder, item:req.body.item, receiver:req.body.receiver});
-      oderproduct.save(function(err, data){
+      //var oderproduct = new order({id:req.body.idorder, item:req.body.item, receiver:req.body.receiver});
+      //oderproduct.save(function(err, data){
+      listord.AddOrder(req.body.idorder, req.body.item, req.body.receiver, function(err, data1){
         if(err){
           res.send('Error');
         }
@@ -143,7 +164,6 @@ app.get('/cart',function(req, res, next){
               res.send({success:true});
             }
           });
-
         }
       });
     }else{

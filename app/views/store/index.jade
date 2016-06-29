@@ -1,6 +1,17 @@
 extends ../layouts/default.jade
 block content
   link(rel='stylesheet', href='css/store.css')
+  .row
+      .col-sm-23
+        .row.breadcrumb-wrapper
+          .col-sm-18
+            ol.breadcrumb
+              li
+                a(href='#')
+                  i.glyphicon.glyphicon-home
+                  |  DAS
+              li.active
+                | Store
   #order-bar
     form(action="/store" method="Post")#formSearch
       .search(class="search animated bounceInLeft")

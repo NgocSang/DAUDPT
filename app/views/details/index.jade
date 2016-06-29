@@ -87,7 +87,7 @@ block content
                             img(src='#{user.avatar}', alt='Avatar')
                           .comment-box
                             .comment-head
-                              h6.comment-name #{user.username}
+                              h6.comment-name #{user.fullname}
                               i.fa.fa-reply
                               i.fa.fa-heart
                             .comment-content
@@ -105,7 +105,7 @@ block content
                                     input(type='radio', name='rating', value='5', required)
 
                                 textarea#message.form-control(rows='5', required)
-                                button.btn.btn-primary(onclick="Addcomment('#{data[0].productID}','#{user.avatar}','#{user.username}')" style='float:right;') Send
+                                button.btn.btn-primary(onclick="Addcomment('#{data[0].productID}','#{user.avatar}','#{user.fullname}')" style='float:right;') Send
               // end tabs
           .clear
           //

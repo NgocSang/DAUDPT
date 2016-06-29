@@ -14,3 +14,15 @@ exports.ListOrder = function (email, callback) {
     }
   });
 };
+
+exports.AddOrder = function(idorder, item, receiver, callback){
+  var oderproduct = new orders({id:idorder, item:item, receiver:receiver});
+  oderproduct.save(function(err, data){
+    if(err){
+      callback('Eror');
+    }
+    else{
+      callback(null, data);
+    }
+  });
+};

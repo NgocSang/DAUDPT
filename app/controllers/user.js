@@ -1,11 +1,11 @@
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost/DAUDPT');
-mongoose.connect('mongodb://sang:123456789@ds013574.mlab.com:13574/doanudpt');
+mongoose.connect('mongodb://localhost/DAUDPT');
 var db = mongoose.connection;
-var user = mongoose.model('User');
+var User = mongoose.model('User');
+var ObjectId = mongoose.Schema.ObjectId;
 
 exports.Changeavatar = function (email,avatar, callback) {
-  user.update({email:email},{avatar:avatar}).exec(function(err, data){
+  User.update({email:email},{avatar:avatar}).exec(function(err, data){
     if(err){
       callback("Error");
     }
@@ -14,3 +14,21 @@ exports.Changeavatar = function (email,avatar, callback) {
     }
   });
 };
+
+exports.editUser = function(user, newData, callback)
+{
+	User.findOne({'id': ObjectId(newData.id)}, function(e, o){
+		if(e)
+			res.status(400).send('error');
+		else{
+			user.fullname = newData.fullname;
+			user.email = newData.email;
+			user.password = newData.newpassword;
+
+			user.save(function(e) {
+				if (e) callback(e);
+				else callback(null, user);
+			});
+		}
+	});
+}
