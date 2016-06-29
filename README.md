@@ -12,7 +12,7 @@
 - [Chức năng](#Chức-năng)
 - [Data schema](#Data-schema)
 - [Đánh giá cá nhân](#Đánh-giá-cá-nhân)
-- [Video Walkthrough](#Video-Walkthrough)
+- [Demo](#Demo)
 
 ## Giới thiệu
 DAS Store là một website bán hàng nợi mọi tín đồ thời trang thỏa sức mua sắm với các sản phẩm mới nhất của các thương hiệu nổi tiếng trên toàn thế giới. Hãy cùng tham gia với chúng tôi, cùng trải nghiệm và thay đổi thời trang bản thân.
@@ -54,7 +54,9 @@ Website: [DAS Store](https://calm-shore-60790.herokuapp.com)
 * [x] Đặt hàng.
 * [x] Phòng chống cơ chế sql injection, cross-site- scripting.
 * [x] Form validation bằng angularJS.
+
 ## Data schema
+
 ### Cart
 Cart chứa dữ liệu của các sản phẩm khi người dùng thêm sản phẩm vào giỏ hàng. Dựa vào thông tin email của người dùng sau khi đăng nhập để lấy danh sách các sản phẩm đã chọn của người dùng đó trong giỏ hàng.
 ```Javascript
@@ -138,15 +140,16 @@ var UserSchema = new Schema({
 Mục | Nguyễn Ngọc Sáng | Trần Thị Sương | Triệu Xuân Quý | Ng.Đăng Thiện Tâm
 --- | --- | --- | --- | ---
 Hoạt động nhóm | - Sử dụng tốt github<br>-Sử dụng git theo mô hình Feature Branch Workflow | - Sử dụng tốt github<br>- Sử dụng git theo mô hình Feature Branch Workflow | - Sử dụng tốt github<br>- Sử dụng git theo mô hình Feature Branch Workflow | - Sử dụng tốt github<br>- Sử dụng git theo mô hình Feature Branch Workflow
-Công nghệ | - Sử dụng và hiểu được AJAX<br>- So sánh được chỗ nào nên dùng AJAX và nên dùng Form | - Giải thích được lựa chọn xử lý tại client & server
-Thiết kế | - Sử dụng tốt  thiết kế theo thẻ div<br>-Sử dụng các hiệu ứng hover, focus<br>- Biết sử dụng amination<br>- Thiết kế responsive<br>- Sử dụng tốt css và html | - Sử dụng tốt  thiết kế theo thẻ div<br>-Sử dụng các hiệu ứng hover, focus<br>- Biết sử dụng amination<br>- Thiết kế responsive<br>- Sử dụng tốt css và html | - Sử dụng tốt  thiết kế theo thẻ div<br>-Sử dụng các hiệu ứng hover, focus<br>- Biết sử dụng amination<br>- Thiết kế responsive<br>- Sử dụng tốt css và html | - Sử dụng tốt  thiết kế theo thẻ div<br>-Sử dụng các hiệu ứng hover, focus<br>- Biết sử dụng amination<br>- Thiết kế responsive<br>- Sử dụng tốt css và html
-Lập trình font-end | - Sử dụng được javascript<br>- Sử dụng được jquery<br>- Sử dụng được AngularJS1 | - - Sử dụng được javascript | - Sử dụng được javascript | - Sử dụng được javascript
+Công nghệ | - Sử dụng và hiểu được AJAX<br>- So sánh được chỗ nào nên dùng AJAX và nên dùng Form | - Giải thích được lựa chọn xử lý tại client & server | - Sử dụng và hiểu được AJAX<br>- So sánh được chỗ nào nên dùng AJAX và nên dùng Form | - Giải thích được lựa chọn xử lý tại client & server
+Thiết kế | - Sử dụng tốt  thiết kế theo thẻ div<br>-Sử dụng các hiệu ứng hover, focus<br>- Biết sử dụng amination<br>- Thiết kế responsive<br>- Sử dụng tốt css và html | - Sử dụng tốt  thiết kế theo thẻ div<br>-Sử dụng các hiệu ứng hover, focus<br>- Biết sử dụng amination<br>- Thiết kế responsive<br>- Sử dụng tốt css và html | | - Sử dụng tốt  thiết kế theo thẻ div<br>-Sử dụng các hiệu ứng hover, focus<br>- Biết sử dụng amination<br>- Thiết kế responsive<br>- Sử dụng tốt css và html
+Lập trình font-end | - Sử dụng được javascript<br>- Sử dụng được jquery<br>- Sử dụng được AngularJS1 | - Sử dụng được javascript | - Sử dụng được javascript<br>- Sử dụng được jquery | - Sử dụng được javascript
 Lập trình & kiến trúc web | - Hiểu cơ chế và cách hoạt động của mô hình MVC<br>- Hiện thực và sử dụng mô hình MVC<br>- Thao tác tốt với MongoDB, thực hiện nhiều câu truy vấn phức tạp | - Hiểu cơ chế và cách hoạt động của mô hình MVC<br>- Hiện thực và sử dụng mô hình MVC<br>- Thao tác tốt với MongoDB, thực hiện nhiều câu truy vấn phức tạp | - Hiểu cơ chế và cách hoạt động của mô hình MVC<br>- Hiện thực và sử dụng mô hình MVC<br>- Thao tác tốt với MongoDB, thực hiện nhiều câu truy vấn phức tạp | - Hiểu cơ chế và cách hoạt động của mô hình MVC<br>- Hiện thực và sử dụng mô hình MVC
 Ajax | - Hiểu cơ chế và cơ chế thực hiện của AJAX<br>- Lập trình sử dụng callback success, error<br>- Upload ảnh thông qua filestack | - Hiểu cơ chế và cơ chế thực hiện của AJAX | - Hiểu cơ chế và cơ chế thực hiện của AJAX
 Bảo mật | - Hiểu cơ chế tấn công các loại như SQL injection và Cross-site Scripting<br>Phòng tránh được các cơ chế tấn công trên | - Hiểu cơ chế tấn công các loại như SQL injection và Cross-site Scripting<br>Phòng tránh được các cơ chế tấn công trên | - Hiểu cơ chế tấn công các loại như SQL injection và Cross-site Scripting<br>Phòng tránh được các cơ chế tấn công trên | - Hiểu cơ chế tấn công các loại như SQL injection và Cross-site Scripting<br>Phòng tránh được các cơ chế tấn công trên | - Hiểu cơ chế tấn công các loại như SQL injection và Cross-site Scripting<br>Phòng tránh được các cơ chế tấn công trên
 API bên ngoài | - Sử dụng các API hỗ trợ như google map, facebook, google | - Sử dụng các API hỗ trợ như google map, facebook, google | - Sử dụng các API hỗ trợ như google map, facebook, google | - Sử dụng các API hỗ trợ như google map, facebook, google
 Sử dụng frameworks | - Sử dụng tốt framework bootstrap<br>- AngularJS1 | - Sử dụng tốt framework bootstrap | - Sử dụng tốt framework bootstrap | - Sử dụng tốt framework bootstrap
 
+## Demo
 Here's a walkthrough:
 
 ![Video Walkthrough](demo.gif)
