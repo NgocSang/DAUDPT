@@ -8,6 +8,7 @@
 
 ## Mục lục
 - [Giới thiệu](#Giới-thiệu)
+- [Cài đặt](#Cài-đặt)
 - [Wireframe](#Wireframe)
 - [Chức năng](#Chức-năng)
 - [Data schema](#Data-schema)
@@ -18,6 +19,15 @@
 DAS Store là một website bán hàng nợi mọi tín đồ thời trang thỏa sức mua sắm với các sản phẩm mới nhất của các thương hiệu nổi tiếng trên toàn thế giới. Hãy cùng tham gia với chúng tôi, cùng trải nghiệm và thay đổi thời trang bản thân.
 
 Website: [DAS Store](https://calm-shore-60790.herokuapp.com)
+
+## Cài đặt
+```Javascript
+$ git clone git://github.com/NgocSang/DAUDPT
+$ npm install
+$ set NODE_PATH=./config;./app/controllers
+$ npm start
+```
+
 ## Wireframe
 ### Link
 ![Image of Link](./images/link.png)
