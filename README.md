@@ -22,19 +22,19 @@ Website: [DAS Store](https://calm-shore-60790.herokuapp.com)
 ### Link
 ![Image of Link](./images/link.png)
 ### Login
-![Image of Login](https://s6.postimg.org/kvt1gex6l/login.png)
+![Image of Login](./images/login.png)
 ### Home
-![Image of Home](https://s6.postimg.org/5xamlzi4d/home.png)
+![Image of Home](./images/home.png)
 ### Order
-![Image of Order](https://s6.postimg.org/lmqczxoxp/order.png)
+![Image of Order](./images/order.png)
 ### Service
-![Image of Service](https://s6.postimg.org/mqahbw9kt/service.png)
+![Image of Service](./images/service.png)
 ### Store
-![Image of Store](https://s6.postimg.org/cu9ec93st/store.png)
+![Image of Store](./images/store.png)
 ### Cart
-![Image of Cart](https://s6.postimg.org/ate9doi9p/cart.png)
+![Image of Cart](./images/cart.png)
 ### Contact
-![Image of Contact](https://s6.postimg.org/h8daacozh/contact.png)
+![Image of Contact](./images/contact.png)
 ## Chức năng
 * [x] Đăng ký tài khoản bằng tên, email và mật khẩu.
 * [x] Đăng nhập bằng tài khoản đăng ký, tài khoản facebook, tài khoản google.
