@@ -10,7 +10,7 @@ block content
             #map
           .contact-form
             h2 Contact Us
-            form(method='post', action='contact-post.html')
+            form()
               div
                 span
                   label Name
@@ -33,7 +33,7 @@ block content
                   textarea.form-control(name='userMsg')
               div
                 span
-                  input(type='submit', value='Submit us')
+                  button.btn.btn-primary Submit us
           .clear
   script(type='text/javascript', src='https://maps.googleapis.com/maps/api/js?callback=initMap', async='', defer='')
   script(type='text/javascript', src='js/contact.js')
